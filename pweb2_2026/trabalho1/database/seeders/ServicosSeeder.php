@@ -12,6 +12,6 @@ class ServicosSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Servicos::factory()->count(10)->create();
     }
 }
