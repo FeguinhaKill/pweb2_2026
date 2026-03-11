@@ -18,7 +18,11 @@ class ProdutosFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nome' => $this->faker->name(),
+            'descricao' => $this->faker->sentence(),
+            'preco' => $this->faker->randomNumber(5),
+            'categoria' => $this->faker->word(),
+            'mecanismo' => $this->faker->word(),
         ];
     }
 }

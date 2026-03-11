@@ -18,8 +18,6 @@ return new class extends Migration
         $table->integer('preco');
         $table->string('categoria', 50)->default('0');
         $table->string('mecanismo', 50)->default('0');
-        $table->unsignedBigInteger('categoria_id')->default(0);
-        $table->unsignedBigInteger('mecanismo_id')->default(0);
 
         $table->timestamps();
     });
