@@ -15,9 +15,9 @@ class LoginFactory extends Factory
     public function definition(): array
     {
         return [
-            'nome' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'senha' => fake()->password(),
+            'nome' => $this->faker->name,
+            'email' => $this->faker->unique()->safeEmail(),
+            'senha' => $this->faker->password(),
         ];
     }
 }
