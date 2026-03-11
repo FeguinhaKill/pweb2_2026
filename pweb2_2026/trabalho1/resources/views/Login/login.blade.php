@@ -1,4 +1,4 @@
-<form action="{{ route('login') }}" method="post">
+<form action="/login" method="post">
   @csrf
   <div class="form-group">
     <label for="exampleInputEmail1">Nome </label>
