@@ -18,7 +18,7 @@ public function store(Request $request)
     $request->validate([
         'nome' => 'required',
         'email' => 'required|email',
-        'senha' => 'required|min:6',
+        'senha' => 'required',
     ], [
         'nome.required' => 'O nome é obrigatório',
         'email.required' => 'O email é obrigatório',

@@ -10,9 +10,10 @@ class ProdutosController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    function index()
     {
-        //
+        $dados = Produtos::all();
+        return view('produtos', ['dados' => $dados]);
     }
 
     /**
