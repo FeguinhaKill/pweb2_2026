@@ -11,11 +11,6 @@ class AlunoController extends Controller
     function index()
     {
         $dados = Aluno::all(); //select * from aluno
-
-        // dd($dados);
-        //var_dump($dados);
-        //  exit;
-
         return view('aluno.list', ['dados' => $dados]);
     }
 
