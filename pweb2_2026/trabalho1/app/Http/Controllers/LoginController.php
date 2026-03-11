@@ -11,7 +11,7 @@ class LoginController extends Controller
     function index()
     {
         $dados = Login::all();
-        return view('login.list', ['dados' => $dados]);
+        return view('login', ['dados' => $dados]);
     }
     
 }
