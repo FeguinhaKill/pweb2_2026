@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Servicos extends Model
 {
-    /** @use HasFactory<\Database\Factories\ServicosFactory> */
     use HasFactory;
+    protected $fillable = [
+        'nome',
+        'preco',
+        'descricao',
+    ];
 }

@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('servicos', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
+            $table->decimal('preco', 8, 2);
+            $table->text('descricao');
             $table->timestamps();
         });
     }

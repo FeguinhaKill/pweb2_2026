@@ -3,6 +3,12 @@
 @section('conteudo')
 
 <h4>Formulário Serviço</h4>
+<button>
+<a href="{{ url('login') }}" class="btn btn-primary">Login</a>
+</button>
+<button>
+<a href="{{ url('produtos') }}" class="btn btn-primary">Produtos</a>
+</button>
 @php
     $action = url('/servicos');
 @endphp
@@ -20,7 +26,7 @@
         @method('PUT')
     @endif
 
-    <input type="hidden" name="id" value="{{ $dado->id ?? '' }}">
+    <input type="hidden" name="id">
 
     <div class="row mb-3">
         <div class="col-md-6">
@@ -28,8 +34,7 @@
             <input 
                 class="form-control"
                 type="text"
-                name="nome"
-                value="{{ old('nome', $dado->nome ?? '') }}">
+                name="nome">
         </div>
 
         <div class="col-md-6">
@@ -38,8 +43,7 @@
                 class="form-control"
                 type="number"
                 step="0.01"
-                name="preco"
-                value="{{ old('preco', $dado->preco ?? '') }}">
+                name="preco">
         </div>
     </div>
 
@@ -49,8 +53,7 @@
             <input 
                 class="form-control"
                 type="text"
-                name="duracao"
-                value="{{ old('duracao', $dado->duracao ?? '') }}">
+                name="duracao">
         </div>
     </div>
 
@@ -59,7 +62,7 @@
         <textarea 
             class="form-control"
             name="descricao"
-            rows="4">{{ old('descricao', $dado->descricao ?? '') }}</textarea>
+            rows="4"></textarea>
     </div>
 
     <div class="row">

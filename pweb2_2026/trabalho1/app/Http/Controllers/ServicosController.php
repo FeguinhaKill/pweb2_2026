@@ -12,7 +12,8 @@ class ServicosController extends Controller
      */
     public function index()
     {
-        //
+        $dados = Servicos::all();
+        return view('servicos', ['dados' => $dados]);
     }
 
     /**
@@ -28,7 +29,23 @@ class ServicosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+        'nome' => 'required',
+        'preco' => 'required',
+        'descricao' => 'required',
+    ], [
+        'nome.required' => 'O nome é obrigatório',
+        'preco.required' => 'O preco é obrigatório',
+        'descricao.required' => 'A descrição é obrigatória',
+    ]);
+
+    Produtos::create([
+        'nome' => $request->nome,
+        'preco' => $request->preco,
+        'descricao' => $request->descricao,
+    ]);
+
+    return redirect('/produtos');
     }
 
     /**
@@ -50,9 +67,28 @@ class ServicosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Servicos $servicos)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+        'nome' => 'required',
+        'preco' => 'required',
+        'descricao' => 'required',
+    ], [
+        'nome.required' => "O nome é obrigatório",
+        'preco.required' => "O preco é obrigatório",
+        'descricao.required' => "A descrição é obrigatória",
+    ]);
+
+    $dados = [
+        'nome' => $request->nome,
+        'preco' => $request->preco,
+        'descricao' => $request->descricao,
+    ];
+
+
+    Produtos::find($id)->update($dados);
+
+    return redirect('servicos');
     }
 
     /**

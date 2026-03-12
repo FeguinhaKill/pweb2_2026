@@ -3,8 +3,9 @@
 @section('conteudo')
 
 <h4>Login</h4>
-
+<button>
 <a href="{{ url('produtos') }}" class="btn btn-primary">Produtos</a>
+</button>
 @php
     $action = url('/login');
 @endphp

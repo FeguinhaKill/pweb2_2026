@@ -11,3 +11,6 @@ Route::get('/login', function () {
 Route::get('/produtos', function () {
     return view('Produtos.produtos');
 });
+Route::get('/servicos', function () {
+    return view('Servicos.servicos');
+});

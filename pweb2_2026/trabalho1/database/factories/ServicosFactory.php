@@ -18,7 +18,9 @@ class ServicosFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nome' => $this->faker->word(),
+            'preco' => $this->faker->randomFloat(2, 10, 100),
+            'descricao' => $this->faker->sentence(),
         ];
     }
 }
