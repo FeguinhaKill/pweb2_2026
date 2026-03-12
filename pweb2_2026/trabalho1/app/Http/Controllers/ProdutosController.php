@@ -28,9 +28,31 @@ class ProdutosController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    $request->validate([
+        'nome' => 'required',
+        'descricao' => 'required',
+        'preco' => 'required|numeric',
+        'categoria' => 'required',
+        'mecanismo' => 'required',
+    ], [
+        'nome.required' => 'O nome é obrigatório',
+        'descricao.required' => 'A descrição é obrigatória',
+        'preco.required' => 'O preço é obrigatório',
+        'categoria.required' => 'A categoria é obrigatória',
+        'mecanismo.required' => 'O mecanismo é obrigatório',
+    ]);
+
+    Produtos::create([
+        'nome' => $request->nome,
+        'descricao' => $request->descricao,
+        'preco' => $request->preco,
+        'categoria' => $request->categoria,
+        'mecanismo' => $request->mecanismo,
+    ]);
+
+    return redirect('/produtos');
+}
 
     /**
      * Display the specified resource.
@@ -51,10 +73,35 @@ class ProdutosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Produtos $produtos)
-    {
-        //
-    }
+    function update(Request $request, $id)
+{
+    $request->validate([
+        'nome' => 'required',
+        'descricao' => 'required',
+        'preco' => 'required|numeric',
+        'categoria' => 'required',
+        'mecanismo' => 'required',
+    ], [
+        'nome.required' => "O nome é obrigatório",
+        'descricao.required' => "A descrição é obrigatória",
+        'preco.required' => "O preço é obrigatório",
+        'categoria.required' => "A categoria é obrigatória",
+        'mecanismo.required' => "O mecanismo é obrigatório",
+    ]);
+
+    $dados = [
+        'nome' => $request->nome,
+        'descricao' => $request->descricao,
+        'preco' => $request->preco,
+        'categoria' => $request->categoria,
+        'mecanismo' => $request->mecanismo,
+    ];
+
+
+    Produtos::find($id)->update($dados);
+
+    return redirect('produtos');
+}  
 
     /**
      * Remove the specified resource from storage.
