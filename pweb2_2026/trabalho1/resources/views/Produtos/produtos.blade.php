@@ -6,13 +6,6 @@
 @php
     $action = url('/produtos');
 @endphp
-@php
-    if (!empty($dado->id)) {
-        $action = route('produto.update', $dado->id);
-    } else {
-        $action = route('produto.store');
-    }
-@endphp
 
 <form action="{{ $action }}" method="POST">
     @csrf
@@ -20,7 +13,7 @@
         @method('PUT')
     @endif
 
-    <input type="hidden" name="id" value="{{ $dado->id ?? '' }}">
+    <input type="hidden" name="id">
 
     <div class="row mb-3">
         <div class="col-md-6">
@@ -28,8 +21,7 @@
             <input 
                 class="form-control" 
                 type="text" 
-                name="nome" 
-                value="{{ old('nome', $dado->nome ?? '') }}">
+                name="nome">
         </div>
 
         <div class="col-md-6">
@@ -38,8 +30,7 @@
                 class="form-control" 
                 type="number" 
                 step="0.01" 
-                name="preco" 
-                value="{{ old('preco', $dado->preco ?? '') }}">
+                name="preco">
         </div>
     </div>
 
@@ -48,15 +39,9 @@
             <label class="form-label">Categoria</label>
             <select name="categoria_id" class="form-select">
                 <option value="">Selecione...</option>
-
-                @foreach ($categorias as $item)
-                    <option 
-                        value="{{ $item->id }}"
-                        {{ old('categoria_id', $dado->categoria_id ?? '') == $item->id ? 'selected' : '' }}>
-                        {{ $item->formato }}
-                    </option>
-                @endforeach
-
+                    <option value="t1">Tipo 1</option>
+                    <option value="t2">Tipo 2</option>
+                    <option value="t3">Tipo 3</option>
             </select>
         </div>
 
@@ -64,27 +49,12 @@
             <label class="form-label">Tipo de Mecanismo</label>
             <select name="mecanismo_id" class="form-select">
                 <option value="">Selecione...</option>
-
-                @foreach ($tipomecanismo as $item)
-                    <option 
-                        value="{{ $item->id }}"
-                        {{ old('mecanismo_id', $dado->mecanismo_id ?? '') == $item->id ? 'selected' : '' }}>
-                        {{ $item->nome }}
-                    </option>
-                @endforeach
-
+                    <option value="m1">Tipo 1</option>
+                    <option value="m2">Tipo 2</option>
+                    <option value="m3">Tipo 3</option>
             </select>
         </div>
     </div>
-
-    <div class="mb-3">
-        <label class="form-label">Descrição</label>
-        <textarea 
-            class="form-control" 
-            name="descricao" 
-            rows="4">{{ old('descricao', $dado->descricao ?? '') }}</textarea>
-    </div>
-
     <div class="row">
         <div class="col">
             <button type="submit" class="btn btn-success">Salvar</button>
