@@ -8,7 +8,6 @@
 @php
     $action = url('/login');
 @endphp
-
 <form action="{{ $action }}" method="POST">
     @csrf
 
