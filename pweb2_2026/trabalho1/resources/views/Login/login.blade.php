@@ -4,6 +4,7 @@
 
 <h4>Login</h4>
 
+<a href="{{ url('produtos') }}" class="btn btn-primary">Produtos</a>
 @php
     $action = url('/login');
 @endphp

@@ -3,6 +3,7 @@
 @section('conteudo')
 
 <h4>Formulário Produto</h4>
+<a href="{{ url('login') }}" class="btn btn-primary">Login</a>
 @php
     $action = url('/produtos');
 @endphp
@@ -58,7 +59,6 @@
     <div class="row">
         <div class="col">
             <button type="submit" class="btn btn-success">Salvar</button>
-            <a href="{{ url('produto') }}" class="btn btn-primary">Voltar</a>
         </div>
     </div>
 
