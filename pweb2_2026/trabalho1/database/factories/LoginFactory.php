@@ -17,7 +17,7 @@ class LoginFactory extends Factory
         return [
             'nome' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail(),
-            'senha' => $this->faker->password(),
+            'senha' => $this->faker->password($minLength = 2, $maxLength = 6),
         ];
     }
 }

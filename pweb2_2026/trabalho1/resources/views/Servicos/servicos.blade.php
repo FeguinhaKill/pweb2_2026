@@ -12,13 +12,6 @@
 @php
     $action = url('/servicos');
 @endphp
-@php
-    if (!empty($dado->id)) {
-        $action = route('servico.update', $dado->id);
-    } else {
-        $action = route('servico.store');
-    }
-@endphp
 
 <form action="{{ $action }}" method="POST">
     @csrf

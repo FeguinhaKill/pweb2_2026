@@ -22,7 +22,7 @@ class ProdutosFactory extends Factory
             'descricao' => $this->faker->sentence(),
             'preco' => $this->faker->randomNumber(5),
             'categoria' => $this->faker->word(),
-            'mecanismo' => $this->faker->word(),
+            'mecanismo' => $this->faker->word()
         ];
     }
 }

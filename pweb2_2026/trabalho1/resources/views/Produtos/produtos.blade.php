@@ -7,7 +7,7 @@
 <a href="{{ url('login') }}" class="btn btn-primary">Login</a>
 </button>
 <button>
-<a href="{{ url('servicos') }}" class="btn btn-primary">Produtos</a>
+<a href="{{ url('servicos') }}" class="btn btn-primary">Serviços</a>
 </button>
 @php
     $action = url('/produtos');

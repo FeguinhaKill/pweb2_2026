@@ -15,7 +15,7 @@ class ServicosFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition(): array 
     {
         return [
             'nome' => $this->faker->word(),

@@ -6,6 +6,9 @@
 <button>
 <a href="{{ url('produtos') }}" class="btn btn-primary">Produtos</a>
 </button>
+<button>
+<a href="{{ url('servicos') }}" class="btn btn-primary">Serviços</a>
+</button>
 @php
     $action = url('/login');
 @endphp
