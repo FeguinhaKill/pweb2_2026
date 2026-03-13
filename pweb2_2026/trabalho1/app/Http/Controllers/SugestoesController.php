@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Servicos;
+use App\Models\Sugestoes;
 use Illuminate\Http\Request;
 
-class ServicosController extends Controller
+class SugestoesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $dados = Servicos::all();
-        return view('servicos', ['dados' => $dados]);
+        $dados = Sugestoes::all();
+        return view('Sugestoes', ['dados' => $dados]);
     }
 
     /**
@@ -31,27 +31,27 @@ class ServicosController extends Controller
     {
         $request->validate([
         'nome' => 'required',
-        'preco' => 'required',
         'descricao' => 'required',
+        'palavras_chaves'=> 'required',
     ], [
         'nome.required' => 'O nome é obrigatório',
-        'preco.required' => 'O preco é obrigatório',
         'descricao.required' => 'A descrição é obrigatória',
+        'palavras_chaves.required' => 'As palavras-chave são obrigatórias',
     ]);
 
-    Servicos::create([
+    Sugestoes::create([
         'nome' => $request->nome,
-        'preco' => $request->preco,
         'descricao' => $request->descricao,
+        'palavras_chaves' => $request->palavras_chaves,
     ]);
 
-    return redirect('/Servicos');
+    return redirect('/Sugestoes');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Servicos $servicos)
+    public function show(Sugestoes $Sugestoes)
     {
         //
     }
@@ -59,7 +59,7 @@ class ServicosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Servicos $servicos)
+    public function edit(Sugestoes $Sugestoes)
     {
         //
     }
@@ -71,30 +71,30 @@ class ServicosController extends Controller
     {
         $request->validate([
         'nome' => 'required',
-        'preco' => 'required',
         'descricao' => 'required',
+        'palavras_chaves'=> 'required',
     ], [
         'nome.required' => "O nome é obrigatório",
-        'preco.required' => "O preco é obrigatório",
         'descricao.required' => "A descrição é obrigatória",
+        'palavras_chaves.required' => "As palavras-chave são obrigatórias",
     ]);
 
     $dados = [
         'nome' => $request->nome,
-        'preco' => $request->preco,
         'descricao' => $request->descricao,
+        'palavras_chaves' => $request->palavras_chaves,
     ];
 
 
-    Servicos::find($id)->update($dados);
+    Sugestoes::find($id)->update($dados);
 
-    return redirect('servicos');
+    return redirect('Sugestoes');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Servicos $servicos)
+    public function destroy(Sugestoes $Sugestoes)
     {
         //
     }

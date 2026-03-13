@@ -1,8 +1,8 @@
 @extends('main')
-@section('titulo', 'Formulário Serviço')
+@section('titulo', 'Formulário Sugestão')
 @section('conteudo')
 
-<h4>Formulário Serviço</h4>
+<h4>Formulário Sugestão</h4>
 <button>
 <a href="{{ url('login') }}" class="btn btn-primary">Login</a>
 </button>
@@ -16,7 +16,7 @@
 <a href="{{ url('sugestoes') }}" class="btn btn-primary">Sugestões</a>
 </button>
 @php
-    $action = url('/servicos');
+    $action = url('/sugestoes');
 @endphp
 
 <form action="{{ $action }}" method="POST">
@@ -35,25 +35,6 @@
                 type="text"
                 name="nome">
         </div>
-
-        <div class="col-md-6">
-            <label class="form-label">Preço</label>
-            <input 
-                class="form-control"
-                type="number"
-                step="0.01"
-                name="preco">
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <label class="form-label">Duração</label>
-            <input 
-                class="form-control"
-                type="text"
-                name="duracao">
-        </div>
     </div>
 
     <div class="mb-3">
@@ -64,10 +45,19 @@
             rows="4"></textarea>
     </div>
 
+    <div class="mb-3">
+        <label class="form-label">Palavras-chave</label>
+        <input 
+            class="form-control"
+            type="text"
+            name="palavras_chave"
+            placeholder="Separe por vírgulas">
+    </div>
+
     <div class="row">
         <div class="col">
             <button type="submit" class="btn btn-success">Salvar</button>
-            <a href="{{ url('servico') }}" class="btn btn-primary">Voltar</a>
+            <a href="{{ url('sugestoes') }}" class="btn btn-primary">Voltar</a>
         </div>
     </div>
 

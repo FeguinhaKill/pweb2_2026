@@ -14,3 +14,6 @@ Route::get('/produtos', function () {
 Route::get('/servicos', function () {
     return view('Servicos.servicos');
 });
+Route::get('/sugestoes', function () {
+    return view('Sugestoes.sugestoes');
+});
