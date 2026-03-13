@@ -9,7 +9,7 @@ class Sugestoes extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nome',
+        'titulo',
         'descricao',
         'palavras_chaves',
     ];

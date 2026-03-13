@@ -18,7 +18,7 @@ class SugestoesFactory extends Factory
     public function definition(): array 
     {
         return [
-            'nome' => $this->faker->word(),
+            'titulo' => $this->faker->word(),
             'descricao' => $this->faker->sentence(),
             'palavras_chaves' => $this->faker->words(3, true),
         ];

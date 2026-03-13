@@ -30,17 +30,17 @@ class SugestoesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'nome' => 'required',
+        'titulo' => 'required',
         'descricao' => 'required',
         'palavras_chaves'=> 'required',
     ], [
-        'nome.required' => 'O nome é obrigatório',
+        'titulo.required' => 'O titulo é obrigatório',
         'descricao.required' => 'A descrição é obrigatória',
         'palavras_chaves.required' => 'As palavras-chave são obrigatórias',
     ]);
 
     Sugestoes::create([
-        'nome' => $request->nome,
+        'titulo' => $request->titulo,
         'descricao' => $request->descricao,
         'palavras_chaves' => $request->palavras_chaves,
     ]);
@@ -70,17 +70,17 @@ class SugestoesController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-        'nome' => 'required',
+        'titulo' => 'required',
         'descricao' => 'required',
         'palavras_chaves'=> 'required',
     ], [
-        'nome.required' => "O nome é obrigatório",
+        'titulo.required' => "O titulo é obrigatório",
         'descricao.required' => "A descrição é obrigatória",
         'palavras_chaves.required' => "As palavras-chave são obrigatórias",
     ]);
 
     $dados = [
-        'nome' => $request->nome,
+        'titulo' => $request->titulo,
         'descricao' => $request->descricao,
         'palavras_chaves' => $request->palavras_chaves,
     ];
