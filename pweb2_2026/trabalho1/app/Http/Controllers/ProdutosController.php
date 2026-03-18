@@ -27,7 +27,7 @@ class ProdutosController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function salvar(Request $request)
 {
     $request->validate([
         'nome' => 'required',
@@ -73,7 +73,7 @@ class ProdutosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    function update(Request $request, $id)
+    function atualizar(Request $request, $id)
 {
     $request->validate([
         'nome' => 'required',

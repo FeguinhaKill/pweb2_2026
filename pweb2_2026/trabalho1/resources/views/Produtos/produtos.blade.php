@@ -1,19 +1,15 @@
 @extends('main')
 @section('titulo', 'Formulário Produto')
 @section('conteudo')
-<?php
-session_start();
-print("Bem vindo, " . $_SESSION['nome']);
-?>
 
-
+@include('header')
 
 <h4>Formulário Produto</h4>
 @php
 if (!empty($dado->id)) {
-    $action = url('/atualizar');
+    $action = route('produtos.atualizar');
 } else {
-    $action = url('/salvar');
+    $action = route('produtos.salvar');
 }
 @endphp
 
@@ -44,12 +40,22 @@ if (!empty($dado->id)) {
                 name="preco" 
                 value="{{ old('preco', $dado->preco ?? '') }}">
         </div>
+        
+    </div>
+    <div class="row m">
+            <label class="form-label">Descrição</label>
+            <input 
+                class="form-control" 
+                type="text" 
+                name="descricao" 
+                value="{{ old('descricao', $dado->descricao ?? '') }}">
+        </div>
     </div>
 
     <div class="row mb-3">
         <div class="col-md-6">
             <label class="form-label">Categoria</label>
-            <select name="categoria_id" class="form-select">
+            <select name="categoria" class="form-select">
                 <option value="">Selecione...</option>
                     <option value="pistolas">Pistolas</option>
                     <option value="revolveres">Revólveres</option>
@@ -65,7 +71,7 @@ if (!empty($dado->id)) {
 
         <div class="col-md-6">
             <label class="form-label">Tipo de Mecanismo</label>
-            <select name="mecanismo_id" class="form-select">
+            <select name="mecanismo" class="form-select">
                 <option value=""></option>
                     <option value="aeg">AEG</option>
                     <option value="gas">Gás</option>
