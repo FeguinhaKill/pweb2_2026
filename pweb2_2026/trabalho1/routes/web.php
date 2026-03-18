@@ -20,3 +20,4 @@ Route::get('/sugestoes', function () {
 });
 
 Route::post('/login', [LoginController::class, 'submit'])->name('login.submit');
+Route::post('/produtos', [LoginController::class, 'salvar'])->name('produtos.salvar');

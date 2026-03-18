@@ -3,26 +3,18 @@
 @section('conteudo')
 <?php
 session_start();
-print($_SESSION['nome']);
+print("Bem vindo, " . $_SESSION['nome']);
 ?>
 
 
 
 <h4>Formulário Produto</h4>
-<button>
-<a href="{{ url('login') }}" class="btn btn-primary">Login</a>
-</button>
-<button>
-<a href="{{ url('produtos') }}" class="btn btn-primary">Produtos</a>
-</button>
-<button>
-<a href="{{ url('servicos') }}" class="btn btn-primary">Serviços</a>
-</button>
-<button>
-<a href="{{ url('sugestoes') }}" class="btn btn-primary">Sugestões</a>
-</button>
 @php
-    $action = url('/produtos');
+if (!empty($dado->id)) {
+    $action = url('/atualizar');
+} else {
+    $action = url('/salvar');
+}
 @endphp
 
 <form action="{{ $action }}" method="POST">
@@ -39,7 +31,8 @@ print($_SESSION['nome']);
             <input 
                 class="form-control" 
                 type="text" 
-                name="nome">
+                name="nome" 
+                value="{{ old('nome', $dado->nome ?? '') }}">
         </div>
 
         <div class="col-md-6">
@@ -48,7 +41,8 @@ print($_SESSION['nome']);
                 class="form-control" 
                 type="number" 
                 step="0.01" 
-                name="preco">
+                name="preco" 
+                value="{{ old('preco', $dado->preco ?? '') }}">
         </div>
     </div>
 
@@ -57,19 +51,27 @@ print($_SESSION['nome']);
             <label class="form-label">Categoria</label>
             <select name="categoria_id" class="form-select">
                 <option value="">Selecione...</option>
-                    <option value="t1">Tipo 1</option>
-                    <option value="t2">Tipo 2</option>
-                    <option value="t3">Tipo 3</option>
+                    <option value="pistolas">Pistolas</option>
+                    <option value="revolveres">Revólveres</option>
+                    <option value="rifles">Rifles</option>
+                    <option value="carabinas">Carabinas</option>
+                    <option value="submetralhadoras">Submetralhadoras</option>
+                    <option value="espingardas">Espingardas</option>
+                    <option value="municoes">Munições</option>
+                    <option value="acessorios">Acessórios</option>
+                    
             </select>
         </div>
 
         <div class="col-md-6">
             <label class="form-label">Tipo de Mecanismo</label>
             <select name="mecanismo_id" class="form-select">
-                <option value="">Selecione...</option>
-                    <option value="m1">Tipo 1</option>
-                    <option value="m2">Tipo 2</option>
-                    <option value="m3">Tipo 3</option>
+                <option value=""></option>
+                    <option value="aeg">AEG</option>
+                    <option value="gas">Gás</option>
+                    <option value="spring">Spring</option>
+                    <option value="mecanica">Mecânica</option>
+                    <option value="eletropneumatica">Eletropneumática</option>
             </select>
         </div>
     </div>
