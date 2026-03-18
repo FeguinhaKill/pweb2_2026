@@ -2,21 +2,16 @@
 @section('titulo', 'Formulário Sugestão')
 @section('conteudo')
 
+@include('header')
+
 <h4>Formulário Sugestão</h4>
-<button>
-<a href="{{ url('login') }}" class="btn btn-primary">Login</a>
-</button>
-<button>
-<a href="{{ url('produtos') }}" class="btn btn-primary">Produtos</a>
-</button>
-<button>
-<a href="{{ url('servicos') }}" class="btn btn-primary">Serviços</a>
-</button>
-<button>
-<a href="{{ url('sugestoes') }}" class="btn btn-primary">Sugestões</a>
-</button>
+
 @php
-    $action = url('/sugestoes');
+if (!empty($dado->id)) {
+    $action = route('sugestoes.atualizar');
+} else {
+    $action = route('sugestoes.salvar');
+}
 @endphp
 
 <form action="{{ $action }}" method="POST">
@@ -25,15 +20,16 @@
         @method('PUT')
     @endif
 
-    <input type="hidden" name="id">
+    <input type="hidden" name="id" value="{{ $dado->id ?? '' }}">
 
     <div class="row mb-3">
         <div class="col-md-6">
-            <label class="form-label">Nome</label>
+            <label class="form-label">Titulo</label>
             <input 
                 class="form-control"
                 type="text"
-                name="nome">
+                name="titulo"
+                value="{{ old('titulo', $dado->titulo ?? '') }}">
         </div>
     </div>
 
@@ -42,22 +38,22 @@
         <textarea 
             class="form-control"
             name="descricao"
-            rows="4"></textarea>
+            rows="4">{{ old('descricao', $dado->descricao ?? '') }}</textarea>
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Palavras-chave</label>
+        <label class="form-label">Palavras-chaves</label>
         <input 
             class="form-control"
             type="text"
-            name="palavras_chave"
-            placeholder="Separe por vírgulas">
+            name="palavras_chaves"
+            placeholder="ao menos 1"
+            value="{{ old('palavras_chaves', $dado->palavras_chaves ?? '') }}">
     </div>
 
     <div class="row">
         <div class="col">
             <button type="submit" class="btn btn-success">Salvar</button>
-            <a href="{{ url('sugestoes') }}" class="btn btn-primary">Voltar</a>
         </div>
     </div>
 

@@ -27,7 +27,7 @@ class SugestoesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function salvar(Request $request)
     {
         $request->validate([
         'titulo' => 'required',
@@ -45,7 +45,7 @@ class SugestoesController extends Controller
         'palavras_chaves' => $request->palavras_chaves,
     ]);
 
-    return redirect('/Sugestoes');
+    return redirect('/sugestoes');
     }
 
     /**
@@ -67,7 +67,7 @@ class SugestoesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function atualizar(Request $request, $id)
     {
         $request->validate([
         'titulo' => 'required',

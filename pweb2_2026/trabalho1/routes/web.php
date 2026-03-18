@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ServicosController;
+use App\Http\Controllers\SugestoesController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,3 +25,4 @@ Route::get('/sugestoes', function () {
 Route::post('/login', [LoginController::class, 'submit'])->name('login.submit');
 Route::post('/produtos', [ProdutosController::class, 'salvar'])->name('produtos.salvar');
 Route::post('/servicos', [ServicosController::class, 'salvar'])->name('servicos.salvar');
+Route::post('/sugestoes', [SugestoesController::class, 'salvar'])->name('sugestoes.salvar');
