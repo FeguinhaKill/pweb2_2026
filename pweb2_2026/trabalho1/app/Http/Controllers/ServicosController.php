@@ -27,7 +27,7 @@ class ServicosController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function salvar(Request $request)
     {
         $request->validate([
         'nome' => 'required',
@@ -45,7 +45,7 @@ class ServicosController extends Controller
         'descricao' => $request->descricao,
     ]);
 
-    return redirect('/Servicos');
+    return redirect('/servicos');
     }
 
     /**
@@ -67,7 +67,7 @@ class ServicosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function atualizar(Request $request, $id)
     {
         $request->validate([
         'nome' => 'required',

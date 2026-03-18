@@ -52,7 +52,6 @@ if (!empty($dado->id)) {
     <div class="row">
         <div class="col">
             <button type="submit" class="btn btn-success">Salvar</button>
-            <a href="{{ route('servicos.index') }}" class="btn btn-primary">Voltar</a>
         </div>
     </div>
 
