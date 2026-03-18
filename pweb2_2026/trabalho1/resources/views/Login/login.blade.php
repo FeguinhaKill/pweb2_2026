@@ -1,26 +1,16 @@
 @extends('main')
 @section('titulo', 'Login')
 @section('conteudo')
+<?php
+session_start();
+?>
+<h1 style="text-align: center;">Login</h1>
 
-<h4>Login</h4>
-<button>
-<a href="{{ url('login') }}" class="btn btn-primary">Login</a>
-</button>
-<button>
-<a href="{{ url('produtos') }}" class="btn btn-primary">Produtos</a>
-</button>
-<button>
-<a href="{{ url('servicos') }}" class="btn btn-primary">Serviços</a>
-</button>
-<button>
-<a href="{{ url('sugestoes') }}" class="btn btn-primary">Sugestões</a>
-</button>
 @php
-    $action = url('/login');
+        $action = route('login.submit');
 @endphp
 <form action="{{ $action }}" method="POST">
-    @csrf
-
+    @csrf 
     <div class="row">
         <div class="col">
             <label for="nome" class="form-label">Nome</label>
@@ -50,6 +40,13 @@
                    class="form-control" 
                    name="senha" 
                    placeholder="Senha...">
+        </div>
+        <div class="col">
+            <label for="possueconta" class="mt-4 form-label">Já possuo uma conta</label>
+            <input type="checkbox" 
+               class="mt-5 form-check-input" 
+               name="possueconta" 
+               id="possueconta">
         </div>
     </div>
 

@@ -4,56 +4,90 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Login;
-
+session_start();
 class LoginController extends Controller
 {
-
-    function index()
+    public function index()
     {
-        $dados = Login::all();
-        return view('login', ['dados' => $dados]);
-    }
-public function store(Request $request)
-{
-    $request->validate([
-        'nome' => 'required',
-        'email' => 'required|email',
-        'senha' => 'required',
-    ], [
-        'nome.required' => 'O nome é obrigatório',
-        'email.required' => 'O email é obrigatório',
-        'senha.required' => 'A senha é obrigatória',
-    ]);
-
-    Login::create([
-        'name' => $request->nome,
-        'email' => $request->email,
-        'password' =>$request->senha,,
-    ]);
-
-    return redirect('/login');
-}
-function update(Request $request, $id)
-{
-    $request->validate([
-        'nome' => 'required',
-        'email' => 'required|email',
-    ], [
-        'nome.required' => "O nome é obrigatório",
-        'email.required' => "O email é obrigatório",
-    ]);
-
-    $dados = [
-        'name' => $request->nome,
-        'email' => $request->email
-    ];
-
-    if ($request->filled('senha')) {
-        $dados['password'] = $request->senha;
+        return view('login');
     }
 
-    Login::find($id)->update($dados);
+    public function submit(Request $request)
+    {
+        if ($request->has('possueconta')) {
+            return $this->logar($request);
+        }
 
-    return redirect('usuario');
-}    
+        return $this->criar($request);
+    }
+
+    private function criar(Request $request)
+    {
+        $request->validate([
+            'nome' => 'required',
+            'email' => 'required|email|unique:logins,email',
+            'senha' => 'required|min:3',
+        ], [
+            'nome.required' => 'O nome é obrigatório',
+            'email.required' => 'O email é obrigatório',
+            'email.email' => 'Email inválido',
+            'email.unique' => 'Email já cadastrado',
+            'senha.required' => 'A senha é obrigatória',
+        ]);
+
+        Login::create([
+            'nome' => $request->nome,
+            'email' => $request->email,
+            'senha' => $request->senha,
+        ]);
+
+        return redirect('/login')->with('success', 'Conta criada com sucesso!');
+    }
+
+    private function logar(Request $request)
+    {
+        $request->validate([
+            'nome' => 'required',
+            'senha' => 'required',
+        ], [
+            'nome.required' => 'O nome é obrigatório',
+            'senha.required' => 'A senha é obrigatória',
+        ]);
+
+        $login = Login::where('nome', $request->nome)->first();
+
+        if ($login && $request->senha === $login->senha) {
+            $_SESSION['nome'] = $login->nome;
+
+            return redirect('/produtos');
+        }
+
+        return back()->withErrors([
+            'nome' => 'Credenciais inválidas'
+        ])->withInput();
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nome' => 'required',
+            'email' => 'required|email',
+        ], [
+            'nome.required' => 'O nome é obrigatório',
+            'email.required' => 'O email é obrigatório',
+        ]);
+
+        $dados = [
+            'nome' => $request->nome,
+            'email' => $request->email,
+        ];
+
+        if ($request->filled('senha')) {
+            $dados['senha'] = $request->senha; 
+        }
+
+        Login::findOrFail($id)->update($dados);
+
+        return redirect('/login');
+    }
 }

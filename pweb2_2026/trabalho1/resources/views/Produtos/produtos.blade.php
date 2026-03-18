@@ -1,6 +1,12 @@
 @extends('main')
 @section('titulo', 'Formulário Produto')
 @section('conteudo')
+<?php
+session_start();
+print($_SESSION['nome']);
+?>
+
+
 
 <h4>Formulário Produto</h4>
 <button>

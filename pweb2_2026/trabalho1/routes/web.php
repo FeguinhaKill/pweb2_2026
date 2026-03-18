@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,3 +18,5 @@ Route::get('/servicos', function () {
 Route::get('/sugestoes', function () {
     return view('Sugestoes.sugestoes');
 });
+
+Route::post('/login', [LoginController::class, 'submit'])->name('login.submit');
