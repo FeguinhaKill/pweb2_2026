@@ -7,9 +7,9 @@ session_start();
         <h3 class="welcome">Bem vindo, <?php echo $_SESSION['nome']; ?></h3>
 
         <ul class="nav-links">
-            <li><a class="btn" href="{{ route('produtos') }}">Produtos</a></li>
-            <li><a class="btn" href="{{ route('servicos') }}">Serviços</a></li>
-            <li><a class="btn" href="{{ route('sugestoes') }}">Sugestões</a></li> 
+            <li><a class="btn" href="{{ route('produtos.index') }}">Produtos</a></li>
+            <li><a class="btn" href="{{ route('servicos.index') }}">Serviços</a></li>
+            <li><a class="btn" href="{{ route('sugestoes.index') }}">Sugestões</a></li> 
         </ul>
     </nav>
 </header>
