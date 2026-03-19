@@ -7,95 +7,64 @@ use Illuminate\Http\Request;
 
 class ServicosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $dados = Servicos::all();
-        return view('servicos', ['dados' => $dados]);
+        return view('Servicos.servicos', compact('dados'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function criar()
     {
-        //
+        return view('Servicos.servicosform', ['dado' => null]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function editar($id)
+    {
+        $dado = Servicos::findOrFail($id);
+        return view('Servicos.servicosform', compact('dado'));
+    }
+
     public function salvar(Request $request)
     {
         $request->validate([
-        'nome' => 'required',
-        'preco' => 'required',
-        'descricao' => 'required',
-    ], [
-        'nome.required' => 'O nome é obrigatório',
-        'preco.required' => 'O preco é obrigatório',
-        'descricao.required' => 'A descrição é obrigatória',
-    ]);
+            'nome' => 'required',
+            'descricao' => 'required',
+            'preco' => 'required|numeric',
+        ]);
 
-    Servicos::create([
-        'nome' => $request->nome,
-        'preco' => $request->preco,
-        'descricao' => $request->descricao,
-    ]);
+        Servicos::create($request->all());
 
-    return redirect('/servicos');
+        return redirect()->route('servicos.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Servicos $servicos)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Servicos $servicos)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function atualizar(Request $request, $id)
     {
         $request->validate([
-        'nome' => 'required',
-        'preco' => 'required',
-        'descricao' => 'required',
-    ], [
-        'nome.required' => "O nome é obrigatório",
-        'preco.required' => "O preco é obrigatório",
-        'descricao.required' => "A descrição é obrigatória",
-    ]);
+            'nome' => 'required',
+            'descricao' => 'required',
+            'preco' => 'required|numeric',
+        ]);
 
-    $dados = [
-        'nome' => $request->nome,
-        'preco' => $request->preco,
-        'descricao' => $request->descricao,
-    ];
+        $servico = Servicos::findOrFail($id);
+        $servico->update($request->all());
 
-
-    Servicos::find($id)->update($dados);
-
-    return redirect('servicos');
+        return redirect()->route('servicos.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Servicos $servicos)
+    public function deletar($id)
     {
-        //
+        Servicos::findOrFail($id)->delete();
+
+        return redirect()->route('servicos.index');
+    }
+
+    public function pesquisar(Request $request)
+    {
+        $tipo = $request->tipo;
+        $valor = $request->valor;
+
+        $dados = Servicos::where($tipo, 'like', "%$valor%")->get();
+
+        return view('Servicos.servicos', compact('dados'));
     }
 }
