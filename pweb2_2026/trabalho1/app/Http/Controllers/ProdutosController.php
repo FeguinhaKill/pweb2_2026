@@ -69,6 +69,6 @@ class ProdutosController extends Controller
 
         $dados = Produtos::where($tipo, 'like', "%$valor%")->get();
 
-        return view('Produtos.produtosform', compact('dados'));
+        return view('Produtos.produtos', compact('dados'));
     }
 }
