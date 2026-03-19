@@ -7,95 +7,70 @@ use Illuminate\Http\Request;
 
 class SugestoesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $dados = Sugestoes::all();
-        return view('Sugestoes', ['dados' => $dados]);
+        return view('Sugestoes.sugestoes', compact('dados'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function criar()
     {
-        //
+        return view('Sugestoes.sugestoesform', ['dado' => null]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function editar($id)
+    {
+        $dado = Sugestoes::findOrFail($id);
+        return view('Sugestoes.sugestoesform', compact('dado'));
+    }
+
     public function salvar(Request $request)
     {
         $request->validate([
-        'titulo' => 'required',
-        'descricao' => 'required',
-        'palavras_chaves'=> 'required',
-    ], [
-        'titulo.required' => 'O titulo é obrigatório',
-        'descricao.required' => 'A descrição é obrigatória',
-        'palavras_chaves.required' => 'As palavras-chave são obrigatórias',
-    ]);
+            'titulo' => 'required',
+            'descricao' => 'required',
+            'palavras_chaves' => 'required',
+        ]);
 
-    Sugestoes::create([
-        'titulo' => $request->titulo,
-        'descricao' => $request->descricao,
-        'palavras_chaves' => $request->palavras_chaves,
-    ]);
+        Sugestoes::create($request->all());
 
-    return redirect('/sugestoes');
+        return redirect()->route('sugestoes.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Sugestoes $Sugestoes)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Sugestoes $Sugestoes)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function atualizar(Request $request, $id)
     {
         $request->validate([
-        'titulo' => 'required',
-        'descricao' => 'required',
-        'palavras_chaves'=> 'required',
-    ], [
-        'titulo.required' => "O titulo é obrigatório",
-        'descricao.required' => "A descrição é obrigatória",
-        'palavras_chaves.required' => "As palavras-chave são obrigatórias",
-    ]);
+            'titulo' => 'required',
+            'descricao' => 'required',
+            'palavras_chaves' => 'required',
+        ]);
 
-    $dados = [
-        'titulo' => $request->titulo,
-        'descricao' => $request->descricao,
-        'palavras_chaves' => $request->palavras_chaves,
-    ];
+        $sugestao = Sugestoes::findOrFail($id);
+        $sugestao->update($request->all());
 
-
-    Sugestoes::find($id)->update($dados);
-
-    return redirect('Sugestoes');
+        return redirect()->route('sugestoes.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Sugestoes $Sugestoes)
+    public function deletar($id)
     {
-        //
+        Sugestoes::findOrFail($id)->delete();
+
+        return redirect()->route('sugestoes.index');
+    }
+
+    public function pesquisar(Request $request)
+    {
+        $tipo = $request->tipo;
+        $valor = $request->valor;
+
+        $permitidos = ['titulo', 'descricao', 'palavras_chaves'];
+
+        if (!in_array($tipo, $permitidos)) {
+            return redirect()->route('sugestoes.index');
+        }
+
+        $dados = Sugestoes::where($tipo, 'like', "%$valor%")->get();
+
+        return view('Sugestoes.sugestoes', compact('dados'));
     }
 }

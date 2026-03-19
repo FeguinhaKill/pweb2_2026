@@ -1,62 +1,86 @@
 @extends('main')
-@section('titulo', 'Formulário Sugestão')
+@section('titulo', 'Listagem de Sugestões')
 @section('conteudo')
 
 @include('header')
 
-<h4>Formulário Sugestão</h4>
+<h4>Listagem de Sugestões</h4>
 
-@php
-if (!empty($dado->id)) {
-    $action = route('sugestoes.atualizar');
-} else {
-    $action = route('sugestoes.salvar');
-}
-@endphp
+<div class="row">
+    <div class="col">
+        <form action="{{ route('sugestoes.pesquisar') }}" method="post">
+            @csrf
+            <div class="row">
 
-<form action="{{ $action }}" method="POST">
-    @csrf
-    @if (!empty($dado->id))
-        @method('PUT')
-    @endif
+                <div class="col-md-3">
+                    <label class="form-label">Tipo</label>
+                    <select name="tipo" class="form-select">
+                        <option value="titulo">Título</option>
+                        <option value="descricao">Descrição</option>
+                        <option value="palavras_chaves">Palavras-chave</option>
+                    </select>
+                </div>
 
-    <input type="hidden" name="id" value="{{ $dado->id ?? '' }}">
+                <div class="col-md-3">
+                    <label class="form-label">Valor</label>
+                    <input type="text" class="form-control" name="valor" placeholder="Pesquisar...">
+                </div>
 
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <label class="form-label">Titulo</label>
-            <input 
-                class="form-control"
-                type="text"
-                name="titulo"
-                value="{{ old('titulo', $dado->titulo ?? '') }}">
-        </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="{{ route('sugestoes.criar') }}" class="btn btn-success">Novo</a>
+                </div>
+
+            </div>
+        </form>
     </div>
+</div>
 
-    <div class="mb-3">
-        <label class="form-label">Descrição</label>
-        <textarea 
-            class="form-control"
-            name="descricao"
-            rows="4">{{ old('descricao', $dado->descricao ?? '') }}</textarea>
+<div class="row mt-3">
+    <div class="col">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Título</th>
+                    <th>Descrição</th>
+                    <th>Palavras-chave</th>
+                    <th>Ação</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($dados as $item)
+                    <tr>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->titulo }}</td>
+                        <td>{{ $item->descricao }}</td>
+                        <td>{{ $item->palavras_chaves }}</td>
+
+                        <td>
+                            <a href="{{ route('sugestoes.editar', $item->id) }}" class="btn btn-warning">
+                                Editar
+                            </a>
+                        </td>
+
+                        <td>
+                            <form action="{{ route('sugestoes.deletar', $item->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Deseja remover o registro?')">
+                                    Deletar
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
-
-    <div class="mb-3">
-        <label class="form-label">Palavras-chaves</label>
-        <input 
-            class="form-control"
-            type="text"
-            name="palavras_chaves"
-            placeholder="ao menos 1"
-            value="{{ old('palavras_chaves', $dado->palavras_chaves ?? '') }}">
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <button type="submit" class="btn btn-success">Salvar</button>
-        </div>
-    </div>
-
-</form>
+</div>
 
 @stop
