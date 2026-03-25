@@ -10,21 +10,20 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::create('produtos', function (Blueprint $table) {
-        $table->id();
-        $table->string('nome', 50);
-        $table->integer('preco');
-        $table->string('descricao', 200);
-        $table->timestamps();
-    });
-}
+    {
+        Schema::create('mecanismo_produtos', function (Blueprint $table) {
+            $table->id();
+            $table->string('nome', 80);
+            $table->string('mecanismo', 40)->nullable();
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('produtos');
+        Schema::dropIfExists('mecanismo_produtos');
     }
 };

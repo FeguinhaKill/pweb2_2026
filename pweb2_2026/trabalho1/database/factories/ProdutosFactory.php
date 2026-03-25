@@ -4,7 +4,8 @@ namespace Database\Factories;
 
 use App\Models\Produtos;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\CategoriaProdutos;
+use App\Models\MecanismoProdutos;
 /**
  * @extends Factory<Produtos>
  */
@@ -21,8 +22,8 @@ class ProdutosFactory extends Factory
             'nome' => $this->faker->name(),
             'descricao' => $this->faker->sentence(),
             'preco' => $this->faker->randomNumber(5),
-            'categoria' => $this->faker->word(),
-            'mecanismo' => $this->faker->word()
+            'categoria_id' => (CategoriaProdutos::All()->random())->id,
+            'mecanismo_id' => (MecanismoProdutos::All()->random())->id
         ];
     }
 }
