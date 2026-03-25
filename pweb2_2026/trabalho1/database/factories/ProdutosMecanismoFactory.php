@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class MecanismoProdutosFactory extends Factory
+class ProdutosMecanismoFactory extends Factory
 {
     public function definition(): array
     {
@@ -16,7 +16,6 @@ class MecanismoProdutosFactory extends Factory
                 'Mecânica',
                 'Eletropneumáticas',
             ]),
-            'mecanismo' => $this->faker->numberBetween(1, 5)
         ];
     }
 

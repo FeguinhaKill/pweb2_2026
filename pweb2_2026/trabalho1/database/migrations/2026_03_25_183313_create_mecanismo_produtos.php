@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('mecanismo_produtos', function (Blueprint $table) {
             $table->id();
             $table->string('nome', 80);
-            $table->string('mecanismo', 40)->nullable();
             $table->timestamps();
         });
     }

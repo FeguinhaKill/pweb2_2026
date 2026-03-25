@@ -15,4 +15,12 @@ class Produtos extends Model
         'categoria',
         'mecanismo',
     ];
+    public function categoria()
+    {
+        return $this->belongsTo(ProdutosCategoria::class, 'categoria_id');
+    }
+    public function mecanismo()
+    {
+        return $this->belongsTo(ProdutosMecanismo::class, 'mecanismo_id');
+    }
 }

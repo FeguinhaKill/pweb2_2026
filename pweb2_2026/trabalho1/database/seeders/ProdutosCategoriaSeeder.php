@@ -4,13 +4,13 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\CategoriaProdutos;
+use App\Models\ProdutosCategoria;
 
 class ProdutosCategoriaSeeder extends Seeder
 {
 
     public function run(): void
     {
-        CategoriaProdutos::factory()->count(8)->create();
+        ProdutosCategoria::factory()->count(8)->create();
     }
 }

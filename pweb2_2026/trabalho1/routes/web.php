@@ -24,7 +24,6 @@ Route::put('/produtos/{id}', [ProdutosController::class, 'atualizar'])->name('pr
 Route::delete('/produtos/{id}', [ProdutosController::class, 'deletar'])->name('produtos.deletar');
 Route::get('/produtos/{id}/editar', [ProdutosController::class, 'editar'])->name('produtos.editar');
 
-
 Route::get('/servicos', [ServicosController::class, 'index'])->name('servicos.index');
 Route::get('/servicos/criar', [ServicosController::class, 'criar'])->name('servicos.criar');
 Route::post('/servicos/pesquisar', [ServicosController::class, 'pesquisar'])->name('servicos.pesquisar');

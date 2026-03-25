@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CategoriaProdutosFactory extends Factory
+class ProdutosCategoriaFactory extends Factory
 {
     public function definition(): array
     {
@@ -19,7 +19,6 @@ class CategoriaProdutosFactory extends Factory
                 'Munições',
                 'Acessórios',
             ]),
-            'categoria' => $this->faker->numberBetween(1, 8)
         ];
     }
 

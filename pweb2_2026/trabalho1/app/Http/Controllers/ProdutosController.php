@@ -9,7 +9,8 @@ class ProdutosController extends Controller
 {
     public function index()
     {
-        $dados = Produtos::all();
+        $dados = Produtos::with(['categoria', 'mecanismo'])->get();
+
         return view('Produtos.produtos', compact('dados'));
     }
 
@@ -21,6 +22,7 @@ class ProdutosController extends Controller
     public function editar($id)
     {
         $dado = Produtos::findOrFail($id);
+
         return view('Produtos.produtosform', compact('dado'));
     }
 
@@ -30,8 +32,8 @@ class ProdutosController extends Controller
             'nome' => 'required',
             'descricao' => 'required',
             'preco' => 'required|numeric',
-            'categoria' => 'required',
-            'mecanismo' => 'required',
+            'categoria_id' => 'required',   
+            'mecanismo_id' => 'required',  
         ]);
 
         Produtos::create($request->all());
@@ -45,8 +47,8 @@ class ProdutosController extends Controller
             'nome' => 'required',
             'descricao' => 'required',
             'preco' => 'required|numeric',
-            'categoria' => 'required',
-            'mecanismo' => 'required',
+            'categoria_id' => 'required',  
+            'mecanismo_id' => 'required',   
         ]);
 
         $produto = Produtos::findOrFail($id);
@@ -67,7 +69,9 @@ class ProdutosController extends Controller
         $tipo = $request->tipo;
         $valor = $request->valor;
 
-        $dados = Produtos::where($tipo, 'like', "%$valor%")->get();
+        $dados = Produtos::with(['categoria', 'mecanismo'])
+            ->where($tipo, 'like', "%$valor%")
+            ->get();
 
         return view('Produtos.produtos', compact('dados'));
     }
