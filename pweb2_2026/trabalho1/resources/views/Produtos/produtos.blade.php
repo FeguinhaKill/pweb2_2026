@@ -16,7 +16,8 @@
                     <label class="form-label">Tipo</label>
                     <select name="tipo" class="form-select">
                         <option value="nome">Nome</option>
-                        <option value="categoria">Categoria</option>
+                        <option value="categoria_id">Categoria</option>
+                        <option value="mecanismo_id">Mecanismo</option>
                         <option value="preco">Preço</option>
                     </select>
                 </div>
@@ -49,8 +50,8 @@
                     <th>Preço</th>
                     <th>Categoria</th>
                     <th>Mecanismo</th>
-                    <th>Ação</th>
-                    <th>Ação</th>
+                    <th>Editar</th>
+                    <th>Deletar</th>
                 </tr>
             </thead>
             <tbody>
@@ -59,8 +60,8 @@
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->nome }}</td>
                         <td>{{ $item->preco }}</td>
-                        <td>{{ $item->categoria }}</td>
-                        <td>{{ $item->mecanismo }}</td>
+                        <td>{{ $item->categoria->nome}}</td>
+                        <td>{{ $item->mecanismo->nome}}</td>
 
                         <td>
                             <a href="{{ route('produtos.editar', $item->id) }}" class="btn btn-warning">Editar</a>

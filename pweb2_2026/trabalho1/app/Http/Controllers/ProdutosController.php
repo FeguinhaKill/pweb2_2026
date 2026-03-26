@@ -63,16 +63,18 @@ class ProdutosController extends Controller
 
         return redirect()->route('produtos.index');
     }
-
     public function pesquisar(Request $request)
     {
-        $tipo = $request->tipo;
-        $valor = $request->valor;
+        if (!empty($request->valor)) {
+            $dados = Produtos::where(
+                $request->tipo,
+                'like',
+                '%' . $request->valor . '%'
+            )->get();
+        } else {
+            $dados = Produtos::all();
+        }
 
-        $dados = Produtos::with(['categoria', 'mecanismo'])
-            ->where($tipo, 'like', "%$valor%")
-            ->get();
-
-        return view('Produtos.produtos', compact('dados'));
+        return view('produtos', ['dados' => $dados]);
     }
 }
