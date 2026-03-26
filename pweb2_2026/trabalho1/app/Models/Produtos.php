@@ -12,8 +12,8 @@ class Produtos extends Model
         'nome',
         'descricao',
         'preco',
-        'categoria',
-        'mecanismo',
+        'categoria_id',
+        'mecanismo_id',
     ];
     public function categoria()
     {

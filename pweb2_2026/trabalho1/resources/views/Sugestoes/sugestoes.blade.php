@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <a href="{{ route('sugestoes.criar') }}" class="btn btn-success">Novo</a>
+                    <a href="{{ route('sugestoes.form') }}" class="btn btn-success">Novo</a>
                 </div>
 
             </div>

@@ -11,6 +11,7 @@ if (!empty($dado->id)) {
 } else {
     $action = route('produtos.salvar');
 }
+
 @endphp
 
 <form action="{{ $action }}" method="POST">
@@ -19,7 +20,7 @@ if (!empty($dado->id)) {
         @method('PUT')
     @endif
 
-    <input type="hidden" name="id">
+    <input type="hidden" name="id" value="{{ $dado->id ?? '' }}">
 
     <div class="row mb-3">
         <div class="col-md-6">
@@ -55,30 +56,30 @@ if (!empty($dado->id)) {
     <div class="row mb-3">
         <div class="col-md-6">
             <label class="form-label">Categoria</label>
-            <select name="categoria" class="form-select">
-                <option value="">Selecione...</option>
-                    <option value="pistolas">Pistolas</option>
-                    <option value="revolveres">Revólveres</option>
-                    <option value="rifles">Rifles</option>
-                    <option value="carabinas">Carabinas</option>
-                    <option value="submetralhadoras">Submetralhadoras</option>
-                    <option value="espingardas">Espingardas</option>
-                    <option value="municoes">Munições</option>
-                    <option value="acessorios">Acessórios</option>
-                    
-            </select>
+            <select name="categoria_id" class="form-select">
+    <option value="">Selecione...</option>
+
+    @foreach ($categorias as $categoria)
+        <option value="{{ $categoria->id }}"
+            {{ old('categoria_id', $dado->categoria_id ?? '') == $categoria->id ? 'selected' : '' }}>
+            {{ $categoria->nome }}
+        </option>
+    @endforeach
+</select>
         </div>
 
         <div class="col-md-6">
             <label class="form-label">Tipo de Mecanismo</label>
-            <select name="mecanismo" class="form-select">
-                <option value=""></option>
-                    <option value="aeg">AEG</option>
-                    <option value="gas">Gás</option>
-                    <option value="spring">Spring</option>
-                    <option value="mecanica">Mecânica</option>
-                    <option value="eletropneumatica">Eletropneumática</option>
-            </select>
+            <select name="mecanismo_id" class="form-select">
+    <option value="">Selecione...</option>
+
+    @foreach ($mecanismos as $mecanismo)
+        <option value="{{ $mecanismo->id }}"
+            {{ old('mecanismo_id', $dado->mecanismo_id ?? '') == $mecanismo->id ? 'selected' : '' }}>
+            {{ $mecanismo->nome }}
+        </option>
+    @endforeach
+</select>
         </div>
     </div>
     <div class="row">

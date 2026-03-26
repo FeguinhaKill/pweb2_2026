@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <a href="{{ route('produtos.criar') }}" class="btn btn-success">Novo</a>
+                    <a href="{{ route('produtos.form') }}" class="btn btn-success">Novo</a>
                 </div>
 
             </div>

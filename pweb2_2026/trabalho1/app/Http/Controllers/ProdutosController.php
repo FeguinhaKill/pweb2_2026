@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Produtos;
 use Illuminate\Http\Request;
+use App\Models\ProdutosCategoria;
+use App\Models\ProdutosMecanismo;
 
 class ProdutosController extends Controller
 {
@@ -89,5 +91,14 @@ class ProdutosController extends Controller
         }
 
         return view('Produtos.produtos', ['dados' => $dados]);
+}
+public function form($id = null)
+{
+    $dado = $id ? Produtos::find($id) : null;
+
+    $categorias = ProdutosCategoria::all();
+    $mecanismos = ProdutosMecanismo::all();
+
+    return view('Produtos.produtosform', compact('dado', 'categorias', 'mecanismos'));
 }
 }
