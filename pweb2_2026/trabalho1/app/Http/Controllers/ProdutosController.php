@@ -66,15 +66,28 @@ class ProdutosController extends Controller
     public function pesquisar(Request $request)
     {
         if (!empty($request->valor)) {
-            $dados = Produtos::where(
-                $request->tipo,
-                'like',
-                '%' . $request->valor . '%'
-            )->get();
-        } else {
+
+            if ($request->tipo == 'categoria_id') {
+                $dados = Produtos::whereHas('categoria', function ($q) use ($request) {
+                    $q->where('nome', 'like', '%' . $request->valor . '%');
+                })->get();
+            } else if($request->tipo == 'mecanismo_id') {
+                $dados = Produtos::whereHas('mecanismo', function ($q) use ($request) {
+                    $q->where('nome', 'like', '%' . $request->valor . '%');
+                })->get();
+            } else {
+                $dados = Produtos::where(
+                    $request->tipo,
+                    'like',
+                    '%' . $request->valor . '%'
+                )->get();
+            }
+        }
+
+        else {
             $dados = Produtos::all();
         }
 
-        return view('produtos', ['dados' => $dados]);
-    }
+        return view('Produtos.produtos', ['dados' => $dados]);
+}
 }
