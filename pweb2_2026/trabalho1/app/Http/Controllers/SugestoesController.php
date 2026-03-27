@@ -13,7 +13,7 @@ class SugestoesController extends Controller
         return view('Sugestoes.sugestoes', compact('dados'));
     }
 
-    public function criar()
+    public function form()
     {
         return view('Sugestoes.sugestoesform', ['dado' => null]);
     }

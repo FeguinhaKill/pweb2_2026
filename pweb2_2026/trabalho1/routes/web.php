@@ -17,7 +17,7 @@ Route::post('/login', [LoginController::class, 'submit'])->name('login.submit');
 
 
 Route::get('/produtos', [ProdutosController::class, 'index'])->name('produtos.index');
-Route::get('/produtos/criar', [ProdutosController::class, 'form'])->name('produtos.form');
+Route::get('/produtos/form', [ProdutosController::class, 'form'])->name('produtos.form');
 Route::post('/produtos/pesquisar', [ProdutosController::class, 'pesquisar'])->name('produtos.pesquisar');
 Route::post('/produtos', [ProdutosController::class, 'salvar'])->name('produtos.salvar');
 Route::put('/produtos/{id}', [ProdutosController::class, 'atualizar'])->name('produtos.atualizar');
@@ -25,7 +25,7 @@ Route::delete('/produtos/{id}', [ProdutosController::class, 'deletar'])->name('p
 Route::get('/produtos/{id}/editar', [ProdutosController::class, 'editar'])->name('produtos.editar');
 
 Route::get('/servicos', [ServicosController::class, 'index'])->name('servicos.index');
-Route::get('/servicos/criar', [ServicosController::class, 'form'])->name('servicos.form');
+Route::get('/servicos/form', [ServicosController::class, 'form'])->name('servicos.form');
 Route::post('/servicos/pesquisar', [ServicosController::class, 'pesquisar'])->name('servicos.pesquisar');
 Route::post('/servicos', [ServicosController::class, 'salvar'])->name('servicos.salvar');
 Route::put('/servicos/{id}', [ServicosController::class, 'atualizar'])->name('servicos.atualizar');
@@ -34,7 +34,7 @@ Route::get('/servicos/{id}/editar', [ServicosController::class, 'editar'])->name
 
 
 Route::get('/sugestoes', [SugestoesController::class, 'index'])->name('sugestoes.index');
-Route::get('/sugestoes/criar', [SugestoesController::class, 'form'])->name('sugestoes.form');
+Route::get('/sugestoes/form', [SugestoesController::class, 'form'])->name('sugestoes.form');
 Route::post('/sugestoes/pesquisar', [SugestoesController::class, 'pesquisar'])->name('sugestoes.pesquisar');
 Route::post('/sugestoes', [SugestoesController::class, 'salvar'])->name('sugestoes.salvar');
 Route::put('/sugestoes/{id}', [SugestoesController::class, 'atualizar'])->name('sugestoes.atualizar');

@@ -13,7 +13,7 @@ class ServicosController extends Controller
         return view('Servicos.servicos', compact('dados'));
     }
 
-    public function criar()
+    public function form()
     {
         return view('Servicos.servicosform', ['dado' => null]);
     }

@@ -22,11 +22,14 @@ class ProdutosController extends Controller
     }
 
     public function editar($id)
-    {
-        $dado = Produtos::findOrFail($id);
+{
+    $dado = Produtos::findOrFail($id);
 
-        return view('Produtos.produtosform', compact('dado'));
-    }
+    $categorias = ProdutosCategoria::all();
+    $mecanismos = ProdutosMecanismo::all();
+
+    return view('Produtos.produtosform', compact('dado', 'categorias', 'mecanismos'));
+}
 
     public function salvar(Request $request)
     {
