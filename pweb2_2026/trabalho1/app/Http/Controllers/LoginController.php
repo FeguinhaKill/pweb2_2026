@@ -7,11 +7,6 @@ use App\Models\Login;
 session_start();
 class LoginController extends Controller
 {
-    public function index()
-    {
-        return view('login');
-    }
-
     public function submit(Request $request)
     {
         if ($request->has('possueconta')) {
@@ -65,29 +60,5 @@ class LoginController extends Controller
         return back()->withErrors([
             'nome' => 'Credenciais inválidas'
         ])->withInput();
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'nome' => 'required',
-            'email' => 'required|email',
-        ], [
-            'nome.required' => 'O nome é obrigatório',
-            'email.required' => 'O email é obrigatório',
-        ]);
-
-        $dados = [
-            'nome' => $request->nome,
-            'email' => $request->email,
-        ];
-
-        if ($request->filled('senha')) {
-            $dados['senha'] = $request->senha; 
-        }
-
-        Login::findOrFail($id)->update($dados);
-
-        return redirect('/login');
     }
 }
