@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ServicosController;
 use App\Http\Controllers\SugestoesController;
@@ -10,10 +9,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('/login', [UsersController::class, 'index'])->name('login.index');
-Route::post('/login', [UsersController::class, 'logar'])->name('login.logar');
-Route::get('/logincriar', [UsersController::class, 'criar'])->name('login.criar');
 
 Route::get('/produtos', [ProdutosController::class, 'index'])->name('produtos.index');
 Route::get('/produtos/form', [ProdutosController::class, 'form'])->name('produtos.form');
