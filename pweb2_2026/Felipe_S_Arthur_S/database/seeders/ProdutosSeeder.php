@@ -13,5 +13,12 @@ class ProdutosSeeder extends Seeder
     public function run(): void
     {
         Produtos::factory()->count(10)->create();
+        Produtos::make([
+            'nome' => 'Requiem',
+            'preco' => '10000.00',
+            'descricao' => 'Revolver de longo alcance e alto impacto, ideal para caça de alvos grandes.',
+            'categoria_id' => '2',
+            'mecanismo_id' => '3'
+        ])->save();
     }
 }
