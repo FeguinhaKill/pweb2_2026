@@ -8,6 +8,7 @@ session_start();
             <li><a class="btn" href="{{ route('produtos.index') }}">Produtos</a></li>
             <li><a class="btn" href="{{ route('servicos.index') }}">Serviços</a></li>
             <li><a class="btn" href="{{ route('sugestoes.index') }}">Sugestões</a></li> 
+            <li><a class="btn" href="{{ route('acessorios.index') }}">Acessorios</a></li> 
         </ul>
     </nav>
 </header>

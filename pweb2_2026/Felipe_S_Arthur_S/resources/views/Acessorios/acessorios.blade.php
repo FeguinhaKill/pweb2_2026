@@ -1,27 +1,14 @@
 @extends('main')
-@section('titulo', 'Listagem de Produtos')
+@section('titulo', 'Listagem de Acessorios')
 @section('conteudo')
 
 @include('header')
 
-<h4>Listagem de Produtos</h4>
+<h4>Listagem de Acessorios</h4>
 
-    @php
-        if (!empty($dado->id)) {
-            $action = route('produtos.update', $dado->id);
-        } else {
-            $action = route('produtos.store');
-        }
-    @endphp
-
-    <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @if (!empty($dado->id))
-            @method('PUT')
-        @endif
 <div class="row">
     <div class="col">
-        <form action="{{ route('produtos.pesquisar') }}" method="post">
+        <form action="{{ route('acessorios.pesquisar') }}" method="post">
             @csrf
             <div class="row">
 
@@ -29,9 +16,8 @@
                     <label class="form-label">Tipo</label>
                     <select name="tipo" class="form-select">
                         <option value="nome">Nome</option>
-                        <option value="categoria_id">Categoria</option>
-                        <option value="mecanismo_id">Mecanismo</option>
                         <option value="preco">Preço</option>
+                        <option value="descricao">Descrição</option>
                     </select>
                 </div>
 
@@ -45,11 +31,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <a href="{{ route('produtos.form') }}" class="btn btn-success">Novo</a>
-                </div>
-
-                <div class="col-md-3">
-                    <a href="{{ url('produtos/report') }}" class="btn btn-secondary"> Relatório Produtos</a>
+                    <a href="{{ route('acessorios.form') }}" class="btn btn-success">Novo</a>
                 </div>
 
             </div>
@@ -63,37 +45,28 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Imagem</th>
                     <th>Nome</th>
                     <th>Preço</th>
-                    <th>Categoria</th>
-                    <th>Mecanismo</th>
+                    <th>Descrição</th>
                     <th>Editar</th>
                     <th>Deletar</th>
-
                 </tr>
             </thead>
             <tbody>
                 @foreach ($dados as $item)
-                    @php
-                        $nome_imagem = !empty($item->imagem) ? $item->imagem : 'nerd.png';
-                    @endphp
                     <tr>
                         <td>{{ $item->id }}</td>
-                        <td> <img src="/storage/{{ $nome_imagem }}" class="rounded-circle" width="150px"
-                            height="150px" alt="imagem">
-                        </td>
                         <td>{{ $item->nome }}</td>
                         <td>{{ $item->preco }}</td>
-                        <td>{{ $item->categoria->nome}}</td>
-                        <td>{{ $item->mecanismo->nome}}</td>
+                        <td>{{ $item->descricao}}</td>
+
 
                         <td>
-                            <a href="{{ route('produtos.editar', $item->id) }}" class="btn btn-warning">Editar</a>
+                            <a href="{{ route('acessorios.editar', $item->id) }}" class="btn btn-warning">Editar</a>
                         </td>
 
                         <td>
-                            <form action="{{ route('produtos.deletar', $item->id) }}" method="post">
+                            <form action="{{ route('acessorios.deletar', $item->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger"

@@ -19,6 +19,7 @@ class ProdutosFactory extends Factory
     public function definition(): array
     {
         return [
+            'imagem' => null,
             'nome' => $this->faker->name(),
             'descricao' => $this->faker->sentence(),
             'preco' => $this->faker->randomNumber(5),

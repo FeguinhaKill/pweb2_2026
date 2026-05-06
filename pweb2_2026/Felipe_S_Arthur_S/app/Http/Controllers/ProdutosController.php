@@ -6,6 +6,7 @@ use App\Models\Produtos;
 use Illuminate\Http\Request;
 use App\Models\ProdutosCategoria;
 use App\Models\ProdutosMecanismo;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProdutosController extends Controller
 {
@@ -34,6 +35,7 @@ class ProdutosController extends Controller
     public function salvar(Request $request)
     {
         $request->validate([
+            'imagem' => 'nullable|image|mimes:png,jpg,jpeg',
             'nome' => 'required',
             'descricao' => 'required',
             'preco' => 'required|numeric',
@@ -45,7 +47,24 @@ class ProdutosController extends Controller
 
         return redirect()->route('produtos.index');
     }
+    function store(Request $request)
+    {
+        $this->salvar($request);
+        $data = $request->all();
+        $imagem = $request->file('imagem');
 
+        if ($imagem) {
+            $nome_imagem = date('YmdiHs') . "." . $imagem->getClientOriginalExtension();
+            $diretorio = "imagem/produtos/";
+            $imagem->storeAs($diretorio, $nome_imagem, 'public');
+
+            $data['imagem'] = $diretorio . $nome_imagem;
+        }
+
+        Produtos::create($data);
+
+        return redirect()->route('produtos.index');
+    }
     public function atualizar(Request $request, $id)
     {
         $request->validate([
@@ -104,4 +123,17 @@ public function form($id = null)
 
     return view('Produtos.produtosform', compact('dado', 'categorias', 'mecanismos'));
 }
+    public function report()
+    {
+        $produtos = Produtos::orderBy('id')->get();
+
+        $data = [
+            'titulo' => 'Relatório Produtos',
+            'produtos' => $produtos,
+        ];
+
+        $pdf = Pdf::loadView('produtos.report', $data);
+
+        return $pdf->download('relatorio_produtos.pdf');
+    }
 }
