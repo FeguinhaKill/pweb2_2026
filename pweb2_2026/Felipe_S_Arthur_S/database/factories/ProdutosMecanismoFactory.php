@@ -7,16 +7,18 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ProdutosMecanismoFactory extends Factory
 {
     public function definition(): array
-    {
-        return [
-            'nome' => $this->faker->unique()->randomElement([
-                'AEG',
-                'Gás',
-                'Spring',
-                'Mecânica',
-                'Eletropneumáticas',
-            ]),
-        ];
-    }
+{
+    return [];
+}
 
+    public function configure()
+    {
+        return $this->sequence(
+            ['nome' => 'AEG'],
+            ['nome' => 'Gás'],
+            ['nome' => 'Spring'],
+            ['nome' => 'Mecânica'],
+            ['nome' => 'Eletropneumáticas'],
+        );
+    }
 }

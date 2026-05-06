@@ -11,6 +11,6 @@ class ProdutosCategoriaSeeder extends Seeder
 
     public function run(): void
     {
-        ProdutosCategoria::factory()->count(8)->create();
+        ProdutosCategoria::factory()->count(7)->create();
     }
 }
