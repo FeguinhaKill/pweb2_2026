@@ -32,39 +32,34 @@ class ProdutosController extends Controller
     return view('Produtos.produtosform', compact('dado', 'categorias', 'mecanismos'));
 }
 
-    public function salvar(Request $request)
-    {
-        $request->validate([
-            'imagem' => 'nullable|image|mimes:png,jpg,jpeg',
-            'nome' => 'required',
-            'descricao' => 'required',
-            'preco' => 'required|numeric',
-            'categoria_id' => 'required',   
-            'mecanismo_id' => 'required',  
-        ]);
+public function salvar(Request $request)
+{
+    $request->validate([
+        'imagem' => 'nullable|image|mimes:png,jpg,jpeg',
+        'nome' => 'required',
+        'descricao' => 'required',
+        'preco' => 'required|numeric',
+        'categoria_id' => 'required',
+        'mecanismo_id' => 'required',
+    ]);
 
-        Produtos::create($request->all());
+    $data = $request->all();
 
-        return redirect()->route('produtos.index');
-    }
-    function store(Request $request)
-    {
-        $this->salvar($request);
-        $data = $request->all();
+    // Tratamento da imagem
+    if ($request->hasFile('imagem')) {
         $imagem = $request->file('imagem');
+        $nome_imagem = date('YmdHis') . "." . $imagem->getClientOriginalExtension();
+        $diretorio = "imagem/produtos/";
 
-        if ($imagem) {
-            $nome_imagem = date('YmdiHs') . "." . $imagem->getClientOriginalExtension();
-            $diretorio = "imagem/produtos/";
-            $imagem->storeAs($diretorio, $nome_imagem, 'public');
+        $imagem->storeAs($diretorio, $nome_imagem, 'public');
 
-            $data['imagem'] = $diretorio . $nome_imagem;
-        }
-
-        Produtos::create($data);
-
-        return redirect()->route('produtos.index');
+        $data['imagem'] = $diretorio . $nome_imagem;
     }
+
+    Produtos::create($data);
+
+    return redirect()->route('produtos.index');
+}
     public function atualizar(Request $request, $id)
     {
         $request->validate([
