@@ -18,8 +18,9 @@ Route::post('/produtos', [ProdutosController::class, 'salvar'])->name('produtos.
 Route::put('/produtos/{id}', [ProdutosController::class, 'atualizar'])->name('produtos.atualizar');
 Route::delete('/produtos/{id}', [ProdutosController::class, 'deletar'])->name('produtos.deletar');
 Route::get('/produtos/{id}/editar', [ProdutosController::class, 'editar'])->name('produtos.editar');
-
 route::get('produtos/report', [\App\Http\Controllers\ProdutosController::class, 'report'])->name('produtos.report');
+
+route::get('servicos/report', [\App\Http\Controllers\ServicosController::class, 'report'])->name('servicos.report');
 Route::get('/servicos', [ServicosController::class, 'index'])->name('servicos.index');
 Route::get('/servicos/form', [ServicosController::class, 'form'])->name('servicos.form');
 Route::post('/servicos/pesquisar', [ServicosController::class, 'pesquisar'])->name('servicos.pesquisar');
