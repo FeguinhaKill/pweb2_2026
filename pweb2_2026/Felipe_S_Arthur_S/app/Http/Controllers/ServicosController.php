@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Servicos;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ServicosController extends Controller
 {
@@ -66,5 +67,18 @@ class ServicosController extends Controller
         $dados = Servicos::where($tipo, 'like', "%$valor%")->get();
 
         return view('Servicos.servicos', compact('dados'));
+    }
+    public function report()
+    {
+        $servicos = Servicos::orderBy('id')->get();
+
+        $data = [
+            'titulo' => 'Relatório Serviços',
+            'servicos' => $servicos,
+        ];
+
+        $pdf = Pdf::loadView('servicos.report', $data);
+
+        return $pdf->download('relatorio_servicos.pdf');
     }
 }

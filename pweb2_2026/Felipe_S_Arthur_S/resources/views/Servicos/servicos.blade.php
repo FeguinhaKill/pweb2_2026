@@ -33,6 +33,10 @@
                 <div class="col-md-3">
                     <a href="{{ route('servicos.form') }}" class="btn btn-success">Novo</a>
                 </div>
+                           
+                <div class="col-md-3">
+                    <a href="{{ route('servicos.report') }}" class="btn btn-secondary"> Relatório Serviços</a>
+                </div>                
 
             </div>
         </form>
