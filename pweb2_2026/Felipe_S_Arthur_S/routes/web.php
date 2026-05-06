@@ -18,10 +18,8 @@ Route::post('/produtos', [ProdutosController::class, 'salvar'])->name('produtos.
 Route::put('/produtos/{id}', [ProdutosController::class, 'atualizar'])->name('produtos.atualizar');
 Route::delete('/produtos/{id}', [ProdutosController::class, 'deletar'])->name('produtos.deletar');
 Route::get('/produtos/{id}/editar', [ProdutosController::class, 'editar'])->name('produtos.editar');
-Route::get('/produtos', [ProdutosController::class, 'store'])->name('produtos.store');
 
 route::get('produtos/report', [\App\Http\Controllers\ProdutosController::class, 'report'])->name('produtos.report');
-
 Route::get('/servicos', [ServicosController::class, 'index'])->name('servicos.index');
 Route::get('/servicos/form', [ServicosController::class, 'form'])->name('servicos.form');
 Route::post('/servicos/pesquisar', [ServicosController::class, 'pesquisar'])->name('servicos.pesquisar');
@@ -42,7 +40,6 @@ Route::get('/acessorios', [AcessoriosController::class, 'index'])->name('acessor
 Route::get('/acessorios/form', [AcessoriosController::class, 'form'])->name('acessorios.form');
 Route::post('/acessorios/pesquisar', [AcessoriosController::class, 'pesquisar'])->name('acessorios.pesquisar');
 Route::post('/acessorios', [AcessoriosController::class, 'salvar'])->name('acessorios.salvar');
-Route::put('/acessorioss/{id}', [AcessoriosController::class, 'atualizar'])->name('acessorios.atualizar');
-Route::delete('/acessorioss/{id}', [AcessoriosController::class, 'deletar'])->name('acessorios.deletar');
+Route::put('/acessorios/{id}', [AcessoriosController::class, 'atualizar'])->name('acessorios.atualizar');
+Route::delete('/acessorios/{id}', [AcessoriosController::class, 'deletar'])->name('acessorios.deletar');
 Route::get('/acessorios/{id}/editar', [AcessoriosController::class, 'editar'])->name('acessorios.editar');
-

@@ -10,7 +10,7 @@
         if (!empty($dado->id)) {
             $action = route('produtos.update', $dado->id);
         } else {
-            $action = route('produtos.store');
+            $action = route('produtos.salvar');
         }
     @endphp
 
