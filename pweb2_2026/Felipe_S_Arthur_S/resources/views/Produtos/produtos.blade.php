@@ -68,7 +68,8 @@
                     <th>Preço</th>
                     <th>Categoria</th>
                     <th>Mecanismo</th>
-                    <th>QTD Acessorios</th>
+                    <th>QTD </th>
+                    <th>Acessorios</th>
                     <th>Editar</th>
                     <th>Deletar</th>
 
