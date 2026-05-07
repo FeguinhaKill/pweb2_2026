@@ -3,9 +3,6 @@
 @section('conteudo')
 
 @include('header')
-
-<h4>Listagem de Acessorios</h4>
-
 <div class="row">
     <div class="col">
         <form action="{{ route('acessorios.pesquisar') }}" method="post">
@@ -16,6 +13,7 @@
                     <label class="form-label">Tipo</label>
                     <select name="tipo" class="form-select">
                         <option value="nome">Nome</option>
+                        <option value="produto">Produto</option>
                         <option value="preco">Preço</option>
                         <option value="descricao">Descrição</option>
                     </select>
@@ -30,9 +28,11 @@
                     <button type="submit" class="btn btn-primary">Buscar</button>
                 </div>
 
+                @if(request()->has('tipo') && request()->has('valor'))
                 <div class="col-md-3">
-                    <a href="{{ route('acessorios.form') }}" class="btn btn-success">Novo</a>
+                    <a href="{{ route('acessorios.index') }}" class="btn btn-secondary">Limpar Filtros</a>
                 </div>
+                @endif
 
             </div>
         </form>
@@ -46,6 +46,7 @@
                 <tr>
                     <th>#</th>
                     <th>Nome</th>
+                    <th>Produto</th>
                     <th>Preço</th>
                     <th>Descrição</th>
                     <th>Editar</th>
@@ -57,6 +58,7 @@
                     <tr>
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->nome }}</td>
+                        <td>{{ $item->produto->nome ?? 'N/A' }}</td>
                         <td>{{ $item->preco }}</td>
                         <td>{{ $item->descricao}}</td>
 

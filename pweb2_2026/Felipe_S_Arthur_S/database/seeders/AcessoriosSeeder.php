@@ -13,6 +13,12 @@ class AcessoriosSeeder extends Seeder
      */
     public function run(): void
     {
-        Acessorios::factory()->count(10)->create();
+        Acessorios::factory()->count(5)->create();
+        Acessorios::make([
+            'produto_id' => 3, 
+            'nome' => '4x Prism Scope',
+            'preco' => '2500.00',
+            'descricao' => 'Mira prismática 4x de alta precisão para rifles, ideal para tiro de médio alcance.',
+        ])->save();
     }
 }

@@ -68,6 +68,7 @@
                     <th>Preço</th>
                     <th>Categoria</th>
                     <th>Mecanismo</th>
+                    <th>QTD Acessorios</th>
                     <th>Editar</th>
                     <th>Deletar</th>
 
@@ -87,6 +88,16 @@
                         <td>{{ $item->preco }}</td>
                         <td>{{ $item->categoria->nome}}</td>
                         <td>{{ $item->mecanismo->nome}}</td>
+                        <td>
+                            {{ $item->acessorios->count() }}
+                        </td>
+                        <td>
+                            @if($item->acessorios->count() > 0)
+                                <a href="{{ route('acessorios.index') }}?tipo=produto_id&valor={{ $item->id }}" class="btn btn-info btn-sm">Ver Acessórios</a>
+                            @else
+                                <span class="text-muted">Sem acessórios</span>
+                            @endif
+                        </td>
 
                         <td>
                             <a href="{{ route('produtos.editar', $item->id) }}" class="btn btn-warning">Editar</a>

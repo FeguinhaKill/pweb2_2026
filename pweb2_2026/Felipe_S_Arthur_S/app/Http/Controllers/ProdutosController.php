@@ -12,7 +12,7 @@ class ProdutosController extends Controller
 {
     public function index()
     {
-        $dados = Produtos::with(['categoria', 'mecanismo'])->get();
+        $dados = Produtos::with(['categoria', 'mecanismo', 'acessorios'])->get();
 
         return view('Produtos.produtos', compact('dados'));
     }
@@ -87,15 +87,15 @@ public function salvar(Request $request)
         if (!empty($request->valor)) {
 
             if ($request->tipo == 'categoria_id') {
-                $dados = Produtos::whereHas('categoria', function ($q) use ($request) {
+                $dados = Produtos::with(['categoria', 'mecanismo', 'acessorios'])->whereHas('categoria', function ($q) use ($request) {
                     $q->where('nome', 'like', '%' . $request->valor . '%');
                 })->get();
             } else if($request->tipo == 'mecanismo_id') {
-                $dados = Produtos::whereHas('mecanismo', function ($q) use ($request) {
+                $dados = Produtos::with(['categoria', 'mecanismo', 'acessorios'])->whereHas('mecanismo', function ($q) use ($request) {
                     $q->where('nome', 'like', '%' . $request->valor . '%');
                 })->get();
             } else {
-                $dados = Produtos::where(
+                $dados = Produtos::with(['categoria', 'mecanismo', 'acessorios'])->where(
                     $request->tipo,
                     'like',
                     '%' . $request->valor . '%'
@@ -104,7 +104,7 @@ public function salvar(Request $request)
         }
 
         else {
-            $dados = Produtos::all();
+            $dados = Produtos::with(['categoria', 'mecanismo', 'acessorios'])->get();
         }
 
         return view('Produtos.produtos', ['dados' => $dados]);

@@ -3,30 +3,56 @@
 namespace App\Http\Controllers;
 
 use App\Models\Acessorios;
+use App\Models\Produtos;
 use Illuminate\Http\Request;
 
 class AcessoriosController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $dados = Acessorios::all();
+        $dados = Acessorios::with('produto');
+
+        // Verifica se há parâmetros de filtro na URL
+        if ($request->has('tipo') && $request->has('valor')) {
+            $tipo = $request->tipo;
+            $valor = $request->valor;
+
+            $permitidos = ['nome', 'preco', 'descricao', 'produto', 'produto_id'];
+
+            if (in_array($tipo, $permitidos)) {
+                if ($tipo == 'produto') {
+                    $dados = $dados->whereHas('produto', function ($q) use ($valor) {
+                        $q->where('nome', 'like', "%$valor%");
+                    });
+                } elseif ($tipo == 'produto_id') {
+                    $dados = $dados->where('produto_id', $valor);
+                } else {
+                    $dados = $dados->where($tipo, 'like', "%$valor%");
+                }
+            }
+        }
+
+        $dados = $dados->get();
         return view('Acessorios.acessorios', compact('dados'));
     }
 
     public function form()
     {
-        return view('Acessorios.acessoriosform', ['dado' => null]);
+        $produtos = Produtos::all();
+        return view('Acessorios.acessoriosform', ['dado' => null, 'produtos' => $produtos]);
     }
 
     public function editar($id)
     {
         $dado = Acessorios::findOrFail($id);
-        return view('Acessorios.acessoriosform', compact('dado'));
+        $produtos = Produtos::all();
+        return view('Acessorios.acessoriosform', compact('dado', 'produtos'));
     }
 
     public function salvar(Request $request)
     {
         $request->validate([
+            'produto_id' => 'required|exists:produtos,id',
             'nome' => 'required',
             'preco' => 'required',
             'descricao' => 'required',
@@ -40,6 +66,7 @@ class AcessoriosController extends Controller
     public function atualizar(Request $request, $id)
     {
         $request->validate([
+            'produto_id' => 'required|exists:produtos,id',
             'nome' => 'required',
             'preco' => 'required',
             'descricao' => 'required',
@@ -63,13 +90,21 @@ class AcessoriosController extends Controller
         $tipo = $request->tipo;
         $valor = $request->valor;
 
-        $permitidos = ['nome', 'preco', 'descricao'];
+        $permitidos = ['nome', 'preco', 'descricao', 'produto_id', 'produto'];
 
         if (!in_array($tipo, $permitidos)) {
             return redirect()->route('acessorios.index');
         }
 
-        $dados = Acessorios::where($tipo, 'like', "%$valor%")->get();
+        if ($tipo == 'produto_id') {
+            $dados = Acessorios::with('produto')->where('produto_id', $valor)->get();
+        } elseif ($tipo == 'produto') {
+            $dados = Acessorios::with('produto')->whereHas('produto', function ($q) use ($valor) {
+                $q->where('nome', 'like', "%$valor%");
+            })->get();
+        } else {
+            $dados = Acessorios::with('produto')->where($tipo, 'like', "%$valor%")->get();
+        }
 
         return view('Acessorios.acessorios', compact('dados'));
     }

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Acessorios;
+use App\Models\Produtos;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class AcessoriosFactory extends Factory
     public function definition(): array
     {
         return [
+            'produto_id' => (Produtos::all()->random())->id,
             'nome' => $this->faker->name(),
             'preco' => $this->faker->randomNumber(5),
             'descricao' => $this->faker->sentence(),

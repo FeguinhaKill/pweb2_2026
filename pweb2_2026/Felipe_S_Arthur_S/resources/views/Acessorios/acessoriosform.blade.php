@@ -24,6 +24,22 @@ if (!empty($dado->id)) {
 
     <div class="row mb-3">
         <div class="col-md-6">
+            <label class="form-label">Produto</label>
+            <select 
+                class="form-select" 
+                name="produto_id" 
+                required>
+                <option value="">Selecione um produto...</option>
+                @foreach ($produtos ?? [] as $produto)
+                    <option value="{{ $produto->id }}" 
+                        {{ (old('produto_id', $dado->produto_id ?? '') == $produto->id) ? 'selected' : '' }}>
+                        {{ $produto->nome }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="col-md-3">
             <label class="form-label">Nome</label>
             <input 
                 class="form-control" 
@@ -32,7 +48,7 @@ if (!empty($dado->id)) {
                 value="{{ old('nome', $dado->nome ?? '') }}">
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-3">
             <label class="form-label">Preço</label>
             <input 
                 class="form-control" 

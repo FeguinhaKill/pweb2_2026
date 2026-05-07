@@ -23,4 +23,8 @@ class Produtos extends Model
     {
         return $this->belongsTo(ProdutosMecanismo::class, 'mecanismo_id');
     }
+    public function acessorios()
+    {
+        return $this->hasMany(Acessorios::class, 'produto_id');
+    }
 }
