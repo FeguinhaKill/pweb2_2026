@@ -86,10 +86,8 @@ class AcessoriosController extends Controller
 {
     $acessorio = Acessorios::findOrFail($id);
 
-    // remove relações da tabela pivô
     $acessorio->produtos()->detach();
 
-    // deleta o acessório
     $acessorio->delete();
 
     return redirect()
