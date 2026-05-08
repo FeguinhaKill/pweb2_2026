@@ -11,6 +11,6 @@ class ProdutosMecanismoSeeder extends Seeder
 
     public function run(): void
     {
-        ProdutosMecanismo::factory()->count(5)->create();
+        ProdutosMecanismo::factory()->count(6)->create();
     }
 }

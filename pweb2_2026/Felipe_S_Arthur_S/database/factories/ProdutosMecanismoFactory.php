@@ -19,6 +19,9 @@ class ProdutosMecanismoFactory extends Factory
             ['nome' => 'Spring'],
             ['nome' => 'Mecânica'],
             ['nome' => 'Eletropneumáticas'],
+            ['nome' => 'Munição'],
+
+
         );
     }
 }

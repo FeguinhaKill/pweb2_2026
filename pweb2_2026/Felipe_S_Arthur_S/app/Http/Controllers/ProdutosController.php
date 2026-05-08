@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\ProdutosCategoria;
 use App\Models\ProdutosMecanismo;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Charts\QtdProdutosCategoria;
+use App\Charts\QtdProdutosMecanismo;
 
 class ProdutosController extends Controller
 {
@@ -47,13 +49,8 @@ public function salvar(Request $request)
 
     // Tratamento da imagem
     if ($request->hasFile('imagem')) {
-        $imagem = $request->file('imagem');
-        $nome_imagem = date('YmdHis') . "." . $imagem->getClientOriginalExtension();
-        $diretorio = "imagem/produtos/";
-
-        $imagem->storeAs($diretorio, $nome_imagem, 'public');
-
-        $data['imagem'] = $diretorio . $nome_imagem;
+        $path = $request->file('imagem')->store('imagens', 'public');
+        $data['imagem'] = $path;
     }
 
     Produtos::create($data);
@@ -130,5 +127,15 @@ public function form($id = null)
         $pdf = Pdf::loadView('produtos.report', $data);
 
         return $pdf->download('relatorio_produtos.pdf');
+    }
+
+    function chartCategoria(QtdProdutosCategoria $chart)
+    {
+        return view('Produtos.chartCategoria', ['chart' => $chart->build()]);
+    }
+
+    function chartMecanismo(QtdProdutosMecanismo $chart)
+    {
+        return view('Produtos.chartMecanismo', ['chart' => $chart->build()]);
     }
 }
