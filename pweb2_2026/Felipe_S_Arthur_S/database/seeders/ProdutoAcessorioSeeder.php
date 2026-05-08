@@ -38,7 +38,7 @@ class ProdutoAcessorioSeeder extends Seeder
 
         $usados = collect($criados)->pluck('acessorio_id');
 
-        $produtos = Produtos::all();
+        $produtos = Produtos::where('categoria_id', '!=', 7)->get();
 
         $acessorios = Acessorios::whereNotIn('id', $usados)->get();
 
