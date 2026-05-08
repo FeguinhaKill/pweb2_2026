@@ -82,12 +82,20 @@ class AcessoriosController extends Controller
         return redirect()->route('acessorios.index');
     }
 
-    public function deletar($id)
-    {
-        Acessorios::findOrFail($id)->delete();
+  public function deletar($id)
+{
+    $acessorio = Acessorios::findOrFail($id);
 
-        return redirect()->route('acessorios.index');
-    }
+    // remove relações da tabela pivô
+    $acessorio->produtos()->detach();
+
+    // deleta o acessório
+    $acessorio->delete();
+
+    return redirect()
+        ->route('acessorios.index')
+        ->with('success', 'Acessório deletado com sucesso!');
+}
 
     public function pesquisar(Request $request)
     {

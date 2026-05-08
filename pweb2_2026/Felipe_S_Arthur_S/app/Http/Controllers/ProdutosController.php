@@ -9,6 +9,7 @@ use App\Models\ProdutosMecanismo;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Charts\QtdProdutosCategoria;
 use App\Charts\QtdProdutosMecanismo;
+use Illuminate\Database\QueryException;
 
 class ProdutosController extends Controller
 {
@@ -73,12 +74,23 @@ public function salvar(Request $request)
         return redirect()->route('produtos.index');
     }
 
-    public function deletar($id)
-    {
-        Produtos::findOrFail($id)->delete();
+   public function deletar($id)
+{
+    $produto = Produtos::findOrFail($id);
 
-        return redirect()->route('produtos.index');
+    if($produto->acessorios()->count() > 0)
+    {
+        return redirect()
+            ->route('produtos.index')
+            ->with('error', 'Remova os acessórios do produto antes de deletá-lo.');
     }
+
+    $produto->delete();
+
+    return redirect()
+        ->route('produtos.index')
+        ->with('success', 'Produto deletado com sucesso!');
+}
     public function pesquisar(Request $request)
     {
         if (!empty($request->valor)) {

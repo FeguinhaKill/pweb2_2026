@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('acessorios', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('produto_id')->constrained('produtos')->onDelete('cascade');
+        $table->foreignId('produto_id')->constrained('produtos');
         $table->string('nome', 50);
         $table->integer('preco');
         $table->string('descricao', 200);

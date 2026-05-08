@@ -23,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('acessorios', function (Blueprint $table) {
-            $table->foreignId('produto_id')->constrained('produtos')->onDelete('cascade');
+            $table->foreignId('produto_id')->constrained('produtos');
         });
     }
 };
