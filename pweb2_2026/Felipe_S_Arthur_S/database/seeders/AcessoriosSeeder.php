@@ -132,7 +132,7 @@ class AcessoriosSeeder extends Seeder
             'descricao' => 'Coldre rígido com trava de segurança para pistolas.',
         ])->save();
         
-        Acessorios::factory()->count(50)->create();
+        Acessorios::factory()->count(30)->create();
     }
     
 }

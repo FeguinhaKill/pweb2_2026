@@ -109,6 +109,6 @@ class ProdutosSeeder extends Seeder
             'categoria_id' => 7,
             'mecanismo_id' => 6 
         ])->save();
-        Produtos::factory()->count(10)->create();
+        Produtos::factory()->count(5)->create();
     }
 }
