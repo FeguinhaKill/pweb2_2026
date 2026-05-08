@@ -45,7 +45,7 @@
 <body>
 
     <h3>{{ $titulo }}</h3>
-    <img src="{{ storage_path('app/public/nerd.png') }}" style="width: 120px; height: 120px">
+    <img src="{{ storage_path('app/public/imagens/Logo.png') }}" style="width: 120px; height: 120px">
 
     <table>
         <thead>
