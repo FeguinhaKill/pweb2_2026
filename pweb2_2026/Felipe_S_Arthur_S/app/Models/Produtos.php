@@ -25,6 +25,6 @@ class Produtos extends Model
     }
     public function acessorios()
     {
-        return $this->hasMany(Acessorios::class, 'produto_id');
+        return $this->belongsToMany(Acessorios::class, 'produto_acessorio');
     }
 }
