@@ -32,7 +32,7 @@ if (!empty($dado->id)) {
                 <option value="">Selecione um produto...</option>
                 @foreach ($produtos ?? [] as $produto)
                     <option value="{{ $produto->id }}" 
-                        {{ (old('produto_id', $dado->produto_id ?? '') == $produto->id) ? 'selected' : '' }}>
+                        {{ (old('produto_id', $dado->produtos->first()->id ?? '') == $produto->id) ? 'selected' : '' }}>
                         {{ $produto->nome }}
                     </option>
                 @endforeach

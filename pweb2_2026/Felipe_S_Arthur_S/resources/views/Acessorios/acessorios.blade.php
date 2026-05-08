@@ -58,7 +58,7 @@
                     <tr>
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->nome }}</td>
-                        <td>{{ $item->produto->nome ?? 'N/A' }}</td>
+                        <td>{{ $item->produtos->pluck('nome')->join(', ') ?: 'N/A' }}</td>
                         <td>{{ $item->preco }}</td>
                         <td>{{ $item->descricao}}</td>
 

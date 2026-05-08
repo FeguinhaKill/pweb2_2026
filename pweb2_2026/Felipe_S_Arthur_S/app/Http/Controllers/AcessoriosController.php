@@ -10,7 +10,7 @@ class AcessoriosController extends Controller
 {
     public function index(Request $request)
     {
-        $dados = Acessorios::with('produto');
+        $dados = Acessorios::with('produtos');
 
         // Verifica se há parâmetros de filtro na URL
         if ($request->has('tipo') && $request->has('valor')) {
@@ -21,11 +21,13 @@ class AcessoriosController extends Controller
 
             if (in_array($tipo, $permitidos)) {
                 if ($tipo == 'produto') {
-                    $dados = $dados->whereHas('produto', function ($q) use ($valor) {
+                    $dados = $dados->whereHas('produtos', function ($q) use ($valor) {
                         $q->where('nome', 'like', "%$valor%");
                     });
                 } elseif ($tipo == 'produto_id') {
-                    $dados = $dados->where('produto_id', $valor);
+                    $dados = $dados->whereHas('produtos', function ($q) use ($valor) {
+                        $q->where('id', $valor);
+                    });
                 } else {
                     $dados = $dados->where($tipo, 'like', "%$valor%");
                 }
@@ -44,7 +46,7 @@ class AcessoriosController extends Controller
 
     public function editar($id)
     {
-        $dado = Acessorios::findOrFail($id);
+        $dado = Acessorios::with('produtos')->findOrFail($id);
         $produtos = Produtos::all();
         return view('Acessorios.acessoriosform', compact('dado', 'produtos'));
     }
@@ -58,7 +60,8 @@ class AcessoriosController extends Controller
             'descricao' => 'required',
         ]);
 
-        Acessorios::create($request->all());
+        $acessorio = Acessorios::create($request->all());
+        $acessorio->produtos()->attach($request->produto_id);
 
         return redirect()->route('acessorios.index');
     }
@@ -74,6 +77,7 @@ class AcessoriosController extends Controller
 
         $acessorio = Acessorios::findOrFail($id);
         $acessorio->update($request->all());
+        $acessorio->produtos()->sync([$request->produto_id]);
 
         return redirect()->route('acessorios.index');
     }
@@ -97,13 +101,15 @@ class AcessoriosController extends Controller
         }
 
         if ($tipo == 'produto_id') {
-            $dados = Acessorios::with('produto')->where('produto_id', $valor)->get();
+            $dados = Acessorios::with('produtos')->whereHas('produtos', function ($q) use ($valor) {
+                $q->where('id', $valor);
+            })->get();
         } elseif ($tipo == 'produto') {
-            $dados = Acessorios::with('produto')->whereHas('produto', function ($q) use ($valor) {
+            $dados = Acessorios::with('produtos')->whereHas('produtos', function ($q) use ($valor) {
                 $q->where('nome', 'like', "%$valor%");
             })->get();
         } else {
-            $dados = Acessorios::with('produto')->where($tipo, 'like', "%$valor%")->get();
+            $dados = Acessorios::with('produtos')->where($tipo, 'like', "%$valor%")->get();
         }
 
         return view('Acessorios.acessorios', compact('dados'));

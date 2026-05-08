@@ -6,19 +6,6 @@
 
 <h4>Listagem de Produtos</h4>
 
-    @php
-        if (!empty($dado->id)) {
-            $action = route('produtos.update', $dado->id);
-        } else {
-            $action = route('produtos.salvar');
-        }
-    @endphp
-
-    <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @if (!empty($dado->id))
-            @method('PUT')
-        @endif
 <div class="row">
     <div class="col">
         <form action="{{ route('produtos.pesquisar') }}" method="post">
