@@ -96,11 +96,11 @@
                                     <td>{{ \Illuminate\Support\Str::limit($item->descricao, 70) }}</td>
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2 flex-wrap">
-                                            <a href="{{ route('acessorios.editar', $item->id) }}" class="btn btn-sm btn-outline-warning">Editar</a>
-                                            <form action="{{ route('acessorios.deletar', $item->id) }}" method="post">
+                                            <a href="{{ route('acessorios.editar', $item->id) }}" class="btn btn-sm btn-warning">Editar</a>
+                                            <form action="{{ route('acessorios.deletar', $item->id) }}" method="post" class="m-0">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Deseja remover o registro?')">Deletar</button>
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Deseja remover o registro?')">Deletar</button>
                                             </form>
                                         </div>
                                     </td>
