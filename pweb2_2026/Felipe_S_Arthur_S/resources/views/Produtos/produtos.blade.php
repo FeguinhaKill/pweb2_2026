@@ -57,6 +57,13 @@
     </div>
 </div>
 
+<div class="row mb-3">
+    <div class="col">
+        <a href="{{ route('produtos.chartCategoria') }}" class="btn btn-info">Gráfico por Categoria</a>
+        <a href="{{ route('produtos.chartMecanismo') }}" class="btn btn-info">Gráfico por Mecanismo</a>
+    </div>
+</div>
+
 <div class="row">
     <div class="col">
         <table class="table table-hover">
@@ -68,7 +75,7 @@
                     <th>Preço</th>
                     <th>Categoria</th>
                     <th>Mecanismo</th>
-                    <th>QTD </th>
+                    <th>QTD Acessorios</th>
                     <th>Acessorios</th>
                     <th>Editar</th>
                     <th>Deletar</th>

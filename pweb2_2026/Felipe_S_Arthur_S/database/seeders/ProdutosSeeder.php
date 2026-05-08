@@ -101,5 +101,13 @@ class ProdutosSeeder extends Seeder
             'categoria_id' => 3,
             'mecanismo_id' => 4 
         ])->save();
+        Produtos::make([
+            'imagem' => 'imagens/slug.png',
+            'nome' => 'Munição Slug',
+            'preco' => '40.00',
+            'descricao' => 'Cartucho para shotgun com alto poder de penetração.',
+            'categoria_id' => 7,
+            'mecanismo_id' => 6 
+        ])->save();
     }
 }

@@ -19,6 +19,8 @@ Route::put('/produtos/{id}', [ProdutosController::class, 'atualizar'])->name('pr
 Route::delete('/produtos/{id}', [ProdutosController::class, 'deletar'])->name('produtos.deletar');
 Route::get('/produtos/{id}/editar', [ProdutosController::class, 'editar'])->name('produtos.editar');
 route::get('produtos/report', [\App\Http\Controllers\ProdutosController::class, 'report'])->name('produtos.report');
+route::get('produtos/chartCategoria', [\App\Http\Controllers\ProdutosController::class, 'chartCategoria'])->name('produtos.chartCategoria');
+route::get('produtos/chartMecanismo', [\App\Http\Controllers\ProdutosController::class, 'chartMecanismo'])->name('produtos.chartMecanismo');
 
 route::get('servicos/report', [\App\Http\Controllers\ServicosController::class, 'report'])->name('servicos.report');
 Route::get('/servicos', [ServicosController::class, 'index'])->name('servicos.index');

@@ -14,24 +14,13 @@ if (!empty($dado->id)) {
 
 @endphp
 
-<form action="{{ $action }}" method="POST">
+<form action="{{ $action }}" method="POST" enctype="multipart/form-data">
     @csrf
     @if (!empty($dado->id))
         @method('PUT')
     @endif
 
     <input type="hidden" name="id" value="{{ $dado->id ?? '' }}">
-
-    <div class="row">
-        <div class="col">
-            <label class="form-label" for="imagem">Imagem</label>
-            @php
-                $nome_imagem = !empty($dado->imagem) ? $dado->imagem : 'sem_imagem.png';
-            @endphp
-            <img src="/storage/{{ $nome_imagem }}" class="rounded-circle" width="200px" height="200px" alt="imagem">
-            <input type="file" name="imagem" class="form-control" value="{{ old('imagem', $dado->imagem ?? '') }}">
-        </div>
-    </div>
 
     <div class="row mb-3">
         <div class="col-md-6">
@@ -96,10 +85,6 @@ if (!empty($dado->id)) {
         <div class="row">
             <div class="col">
                 <label class="form-label" for="imagem">Imagem</label>
-                @php
-                    $nome_imagem = !empty($dado->imagem) ? $dado->imagem : 'nerd.png';
-                @endphp
-                <img src="/storage/{{ $nome_imagem }}" class="rounded-circle" width="200px" height="200px" alt="imagem">
                 <input type="file" name="imagem" class="form-control" value="{{ old('imagem', $dado->imagem ?? '') }}">
             </div>
         </div>
