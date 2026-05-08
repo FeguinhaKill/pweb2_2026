@@ -58,21 +58,33 @@ public function salvar(Request $request)
 
     return redirect()->route('produtos.index');
 }
-    public function atualizar(Request $request, $id)
-    {
-        $request->validate([
-            'nome' => 'required',
-            'descricao' => 'required',
-            'preco' => 'required|numeric',
-            'categoria_id' => 'required',  
-            'mecanismo_id' => 'required',   
-        ]);
+public function atualizar(Request $request, $id)
+{
+    $request->validate([
+        'imagem' => 'nullable|image|mimes:png,jpg,jpeg',
+        'nome' => 'required',
+        'descricao' => 'required',
+        'preco' => 'required|numeric',
+        'categoria_id' => 'required',
+        'mecanismo_id' => 'required',
+    ]);
 
-        $produto = Produtos::findOrFail($id);
-        $produto->update($request->all());
+    $produto = Produtos::findOrFail($id);
 
-        return redirect()->route('produtos.index');
+    $data = $request->all();
+
+    if ($request->hasFile('imagem')) {
+
+
+        $path = $request->file('imagem')->store('imagens', 'public');
+
+        $data['imagem'] = $path;
     }
+
+    $produto->update($data);
+
+    return redirect()->route('produtos.index');
+}
 
    public function deletar($id)
 {
