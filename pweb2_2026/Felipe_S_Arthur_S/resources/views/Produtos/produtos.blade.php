@@ -72,7 +72,7 @@
             <tbody>
                 @foreach ($dados as $item)
                     @php
-                        $nome_imagem = !empty($item->imagem) ? $item->imagem : 'nerd.png';
+                        $nome_imagem = $item->imagem_caminho;
                     @endphp
                     <tr>
                         <td>{{ $item->id }}</td>

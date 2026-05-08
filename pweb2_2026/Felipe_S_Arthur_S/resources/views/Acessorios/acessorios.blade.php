@@ -39,6 +39,12 @@
     </div>
 </div>
 
+<div class="row mb-3">
+    <div class="col">
+        <a href="{{ route('acessorios.form') }}" class="btn btn-success">Novo</a>
+    </div>
+</div>
+
 <div class="row">
     <div class="col">
         <table class="table table-hover">

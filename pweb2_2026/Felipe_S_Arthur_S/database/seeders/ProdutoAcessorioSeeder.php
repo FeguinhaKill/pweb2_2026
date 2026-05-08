@@ -2,15 +2,16 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Produtos;
+use App\Models\Acessorios;
 
 class ProdutoAcessorioSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('produto_acessorio')->insert([
+        $criados = [
             ['produto_id' => 3, 'acessorio_id' => 1],
             ['produto_id' => 8, 'acessorio_id' => 2],
             ['produto_id' => 4, 'acessorio_id' => 3],
@@ -31,6 +32,21 @@ class ProdutoAcessorioSeeder extends Seeder
             ['produto_id' => 3, 'acessorio_id' => 18],
             ['produto_id' => 5, 'acessorio_id' => 19],
             ['produto_id' => 4, 'acessorio_id' => 20],
-        ]);
+        ];
+
+        DB::table('produto_acessorio')->insert($criados);
+
+        $usados = collect($criados)->pluck('acessorio_id');
+
+        $produtos = Produtos::all();
+
+        $acessorios = Acessorios::whereNotIn('id', $usados)->get();
+
+        foreach ($acessorios as $acessorio) {
+
+            $produto = $produtos->random();
+
+            $produto->acessorios()->attach($acessorio->id);
+        }
     }
 }

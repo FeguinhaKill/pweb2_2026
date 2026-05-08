@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('produto_id');
             $table->unsignedBigInteger('acessorio_id');
+            $table->unique(['acessorio_id']);
         });
     }
 

@@ -26,7 +26,7 @@ class AcessoriosController extends Controller
                     });
                 } elseif ($tipo == 'produto_id') {
                     $dados = $dados->whereHas('produtos', function ($q) use ($valor) {
-                        $q->where('id', $valor);
+                        $q->where('produtos.id', $valor);
                     });
                 } else {
                     $dados = $dados->where($tipo, 'like', "%$valor%");

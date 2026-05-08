@@ -32,7 +32,7 @@ if (!empty($dado->id)) {
                 <option value="">Selecione um produto...</option>
                 @foreach ($produtos ?? [] as $produto)
                     <option value="{{ $produto->id }}" 
-                        {{ (old('produto_id', $dado->produtos->first()->id ?? '') == $produto->id) ? 'selected' : '' }}>
+                        {{ (old('produto_id', $dado ? $dado->produtos->first()->id : '') == $produto->id) ? 'selected' : '' }}>
                         {{ $produto->nome }}
                     </option>
                 @endforeach
@@ -72,7 +72,7 @@ if (!empty($dado->id)) {
     <div class="row">
         <div class="col">
             <button type="submit" class="btn btn-success">Salvar</button>
-             <a href="{{ url('listacessorios') }}" class="btn btn-info">Listagem</a>
+             <a href="{{ route('acessorios.index') }}" class="btn btn-info">Listagem</a>
         </div>
     </div>
 
