@@ -58,9 +58,17 @@ class AcessoriosController extends Controller
             'nome' => 'required',
             'preco' => 'required',
             'descricao' => 'required',
+            'imagem' => 'nullable|image|mimes:png,jpg,jpeg',
         ]);
 
-        $acessorio = Acessorios::create($request->all());
+        $data = $request->all();
+
+        if ($request->hasFile('imagem')) {
+            $path = $request->file('imagem')->store('imagens', 'public');
+            $data['imagem'] = $path;
+        }
+
+        $acessorio = Acessorios::create($data);
         $acessorio->produtos()->attach($request->produto_id);
 
         return redirect()->route('acessorios.index');
@@ -73,10 +81,19 @@ class AcessoriosController extends Controller
             'nome' => 'required',
             'preco' => 'required',
             'descricao' => 'required',
+            'imagem' => 'nullable|image|mimes:png,jpg,jpeg',
         ]);
 
         $acessorio = Acessorios::findOrFail($id);
-        $acessorio->update($request->all());
+        $data = $request->all();
+
+        // Tratamento da imagem
+        if ($request->hasFile('imagem')) {
+            $path = $request->file('imagem')->store('imagens', 'public');
+            $data['imagem'] = $path;
+        }
+
+        $acessorio->update($data);
         $acessorio->produtos()->sync([$request->produto_id]);
 
         return redirect()->route('acessorios.index');

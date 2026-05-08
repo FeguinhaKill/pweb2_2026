@@ -51,6 +51,7 @@
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>Imagem</th>
                     <th>Nome</th>
                     <th>Produto</th>
                     <th>Preço</th>
@@ -61,8 +62,14 @@
             </thead>
             <tbody>
                 @foreach ($dados as $item)
+                    @php
+                        $nome_imagem = $item->imagem_caminho;
+                    @endphp
                     <tr>
                         <td>{{ $item->id }}</td>
+                        <td> <img src="/storage/{{ $nome_imagem }}" class="rounded-circle" width="150px"
+                            height="150px" alt="imagem">
+                        </td>
                         <td>{{ $item->nome }}</td>
                         <td>{{ $item->produtos->pluck('nome')->join(', ') ?: 'N/A' }}</td>
                         <td>{{ $item->preco }}</td>

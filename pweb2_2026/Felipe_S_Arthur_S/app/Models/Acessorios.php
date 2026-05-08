@@ -12,7 +12,16 @@ class Acessorios extends Model
         'nome',
         'preco',
         'descricao',
+        'imagem',
     ];
+
+    protected $appends = ['imagem_caminho'];
+
+    public function getImagemCaminhoAttribute()
+    {
+        return !empty($this->imagem) ? $this->imagem : 'imagens/Simagem.png';
+    }
+
     public function produtos()
     {
         return $this->belongsToMany(Produtos::class, 'produto_acessorio', 'acessorio_id', 'produto_id');

@@ -14,7 +14,7 @@ if (!empty($dado->id)) {
 
 @endphp
 
-<form action="{{ $action }}" method="POST">
+<form action="{{ $action }}" method="POST" enctype="multipart/form-data">
     @csrf
     @if (!empty($dado->id))
         @method('PUT')
@@ -66,6 +66,13 @@ if (!empty($dado->id)) {
                 type="text" 
                 name="descricao" 
                 value="{{ old('descricao', $dado->descricao ?? '') }}">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label class="form-label" for="imagem">Imagem</label>
+            <input type="file" name="imagem" class="form-control" value="{{ old('imagem', $dado->imagem ?? '') }}">
         </div>
     </div>
 
