@@ -9,13 +9,12 @@ class Acessorios extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'produto_id',
         'nome',
         'preco',
         'descricao',
     ];
-    public function produto()
+    public function produtos()
     {
-        return $this->belongsTo(Produtos::class, 'produto_id');
+        return $this->belongsToMany(Produtos::class, 'produto_acessorio');
     }
 }

@@ -9,7 +9,7 @@ use Database\Seeders\ProdutosMecanismoSeeder;
 use Database\Seeders\ProdutosSeeder;
 use Database\Seeders\ServicosSeeder;
 use Database\Seeders\SugestoesSeeder;
-use Database\Seeders\AcessoriosSeeder;
+use Database\Seeders\ProdutoAcessorioSeeder;
 class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             ServicosSeeder::class,
             SugestoesSeeder::class,
             AcessoriosSeeder::class,
+            ProdutoAcessorioSeeder::class,
         ]);
     }
 }

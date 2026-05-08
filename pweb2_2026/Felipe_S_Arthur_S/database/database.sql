@@ -15,11 +15,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Copiando estrutura do banco de dados para laravel
-CREATE DATABASE IF NOT EXISTS `laravel` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `laravel`;
+-- Copiando estrutura do banco de dados para trabalho
+CREATE DATABASE IF NOT EXISTS `trabalho` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `trabalho`;
 
--- Copiando estrutura para tabela laravel.cache
+-- Copiando estrutura para tabela trabalho.cache
 CREATE TABLE IF NOT EXISTS `cache` (
   `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -28,9 +28,9 @@ CREATE TABLE IF NOT EXISTS `cache` (
   KEY `cache_expiration_index` (`expiration`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela laravel.cache: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela trabalho.cache: ~0 rows (aproximadamente)
 
--- Copiando estrutura para tabela laravel.cache_locks
+-- Copiando estrutura para tabela trabalho.cache_locks
 CREATE TABLE IF NOT EXISTS `cache_locks` (
   `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -39,9 +39,9 @@ CREATE TABLE IF NOT EXISTS `cache_locks` (
   KEY `cache_locks_expiration_index` (`expiration`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela laravel.cache_locks: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela trabalho.cache_locks: ~0 rows (aproximadamente)
 
--- Copiando estrutura para tabela laravel.categoria_produtos
+-- Copiando estrutura para tabela trabalho.categoria_produtos
 CREATE TABLE IF NOT EXISTS `categoria_produtos` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `nome` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `categoria_produtos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela laravel.categoria_produtos: ~8 rows (aproximadamente)
+-- Copiando dados para a tabela trabalho.categoria_produtos: ~8 rows (aproximadamente)
 INSERT INTO `categoria_produtos` (`id`, `nome`, `created_at`, `updated_at`) VALUES
 	(1, 'Acessórios', '2026-03-27 21:50:41', '2026-03-27 21:50:41'),
 	(2, 'Pistolas', '2026-03-27 21:50:41', '2026-03-27 21:50:41'),
@@ -61,7 +61,7 @@ INSERT INTO `categoria_produtos` (`id`, `nome`, `created_at`, `updated_at`) VALU
 	(7, 'Carabinas', '2026-03-27 21:50:41', '2026-03-27 21:50:41'),
 	(8, 'Rifles', '2026-03-27 21:50:41', '2026-03-27 21:50:41');
 
--- Copiando estrutura para tabela laravel.failed_jobs
+-- Copiando estrutura para tabela trabalho.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -74,9 +74,9 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela laravel.failed_jobs: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela trabalho.failed_jobs: ~0 rows (aproximadamente)
 
--- Copiando estrutura para tabela laravel.jobs
+-- Copiando estrutura para tabela trabalho.jobs
 CREATE TABLE IF NOT EXISTS `jobs` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `queue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -89,9 +89,9 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   KEY `jobs_queue_reserved_at_available_at_index` (`queue`,`reserved_at`,`available_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela laravel.jobs: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela trabalho.jobs: ~0 rows (aproximadamente)
 
--- Copiando estrutura para tabela laravel.job_batches
+-- Copiando estrutura para tabela trabalho.job_batches
 CREATE TABLE IF NOT EXISTS `job_batches` (
   `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela laravel.migrations: ~10 rows (aproximadamente)
+-- Copiando dados para a tabela laravel.migrations: ~14 rows (aproximadamente)
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '0001_01_01_000000_create_users_table', 1),
 	(2, '0001_01_01_000001_create_cache_table', 1),
@@ -168,7 +168,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(7, '2026_03_13_172140_create_sugestoes_table', 1),
 	(8, '2026_03_25_182313_create_categoria_produtos', 1),
 	(9, '2026_03_25_183313_create_mecanismo_produtos', 1),
-	(10, '2026_03_25_185743_alter_produtos', 1);
+	(10, '2026_03_25_185743_alter_produtos', 1),
+	(11, '2026_04_29_192512_create_acessorios_table', 2),
+	(12, '2026_05_07_160830_alter_acessorios_remove_produto_id', 3),
+	(13, '2026_05_07_160903_create_produto_acessorio_table', 3),
+	(14, '2026_05_07_161626_drop_timestamps_from_produto_acessorio_table', 4);
 
 -- Copiando estrutura para tabela laravel.password_reset_tokens
 CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
@@ -208,6 +212,33 @@ INSERT INTO `produtos` (`id`, `nome`, `preco`, `descricao`, `categoria_id`, `mec
 	(9, 'Dr. Aric Breitenberg PhD', 36266, 'Saepe ipsam et et occaecati facere in.', 6, 4, '2026-03-27 21:50:41', '2026-03-27 21:50:41'),
 	(10, 'Giovanny Weimann', 56063, 'Alias vitae excepturi qui consequatur illo.', 4, 4, '2026-03-27 21:50:41', '2026-03-27 21:50:41'),
 	(11, 'Revolver  Smith & Wesson Model 327 TRR8', 850, 'util em curto alcance', 3, 2, '2026-03-27 21:52:51', '2026-03-27 21:52:51');
+
+-- Copiando estrutura para tabela laravel.acessorios
+CREATE TABLE IF NOT EXISTS `acessorios` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `preco` int NOT NULL,
+  `descricao` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Copiando dados para a tabela laravel.acessorios: ~0 rows (aproximadamente)
+
+-- Copiando estrutura para tabela laravel.produto_acessorio
+CREATE TABLE IF NOT EXISTS `produto_acessorio` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `produto_id` bigint unsigned NOT NULL,
+  `acessorio_id` bigint unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `produto_acessorio_produto_id_foreign` (`produto_id`),
+  KEY `produto_acessorio_acessorio_id_foreign` (`acessorio_id`),
+  CONSTRAINT `produto_acessorio_acessorio_id_foreign` FOREIGN KEY (`acessorio_id`) REFERENCES `acessorios` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `produto_acessorio_produto_id_foreign` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Copiando dados para a tabela laravel.produto_acessorio: ~0 rows (aproximadamente)
 
 -- Copiando estrutura para tabela laravel.servicos
 CREATE TABLE IF NOT EXISTS `servicos` (
