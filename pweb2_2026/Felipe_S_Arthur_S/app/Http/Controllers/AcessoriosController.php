@@ -12,7 +12,6 @@ class AcessoriosController extends Controller
     {
         $dados = Acessorios::with('produtos');
 
-        // Verifica se há parâmetros de filtro na URL
         if ($request->has('tipo') && $request->has('valor')) {
             $tipo = $request->tipo;
             $valor = $request->valor;
@@ -71,7 +70,10 @@ class AcessoriosController extends Controller
         $acessorio = Acessorios::create($data);
         $acessorio->produtos()->attach($request->produto_id);
 
-        return redirect()->route('acessorios.index');
+        return redirect()->route('acessorios.index', [
+            'tipo' => 'produto_id',
+            'valor' => $request->produto_id
+        ]);
     }
 
     public function atualizar(Request $request, $id)
@@ -99,18 +101,18 @@ class AcessoriosController extends Controller
         return redirect()->route('acessorios.index');
     }
 
-  public function deletar($id)
-{
-    $acessorio = Acessorios::findOrFail($id);
+    public function deletar($id)
+    {
+        $acessorio = Acessorios::findOrFail($id);
 
-    $acessorio->produtos()->detach();
+        $acessorio->produtos()->detach();
 
-    $acessorio->delete();
+        $acessorio->delete();
 
-    return redirect()
-        ->route('acessorios.index')
-        ->with('success', 'Acessório deletado com sucesso!');
-}
+        return redirect()
+            ->route('acessorios.index')
+            ->with('success', 'Acessório deletado com sucesso!');
+    }
 
     public function pesquisar(Request $request)
     {
