@@ -89,7 +89,7 @@
                     <div class="row mt-4">
                         <div class="col d-flex gap-2 flex-wrap">
                             <button type="submit" class="btn btn-success">Salvar</button>
-                            <a href="{{ url('listprodutos') }}" class="btn btn-secondary">Voltar à Lista</a>
+                            <a href="{{ url('produtos') }}" class="btn btn-secondary">Voltar à Lista</a>
                         </div>
                     </div>
                 </form>
